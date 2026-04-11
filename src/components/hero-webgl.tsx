@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
+import { OkinoLogo } from "@/components/navbar"
 
 const FLYER_URL = "https://cdn.poehali.dev/projects/59266136-7b6c-414f-a200-d1fd1000076c/bucket/8b7aa1a5-cce5-49f4-9034-39e37035d7fa.jpg"
 
@@ -150,10 +151,10 @@ export function Hero3DWebGL() {
         </div>
 
         <div className="relative z-10 text-center px-4 flex flex-col items-center">
-          <div className="mb-2 flex items-center gap-2">
-            <span className="font-bebas text-red-500 text-sm tracking-[0.3em]">18+</span>
-            <span className="w-px h-4 bg-red-500/40" />
-            <span className="font-geist text-white/50 text-xs tracking-widest uppercase">Любительское кино</span>
+          <div className="mb-4 flex items-center gap-4">
+            <span className="font-geist text-red-500 text-xs tracking-[0.3em] font-light">18+</span>
+            <OkinoLogo size={52} />
+            <span className="font-geist text-white/40 text-xs tracking-widest uppercase">Любительское кино</span>
           </div>
 
           <div className="relative mb-2">
@@ -185,10 +186,6 @@ export function Hero3DWebGL() {
           <div className="mt-6 tape-effect inline-block bg-white text-black px-6 py-2 rounded-sm shadow-lg">
             <span className="font-space-mono text-sm md:text-base font-bold tracking-wider">24 / 25 / 26 АПРЕЛЯ</span>
           </div>
-
-          <p className="font-geist text-white/40 text-xs tracking-widest mt-4 uppercase">
-            ГЭС 9/02 · Проспект Мусы Джалиля 51 · Этаж 4 · 420 кабинет
-          </p>
 
           <div className="flex gap-4 mt-8">
             <Button className="bg-red-600 hover:bg-red-700 text-white font-geist px-8 py-3 text-base border-0">

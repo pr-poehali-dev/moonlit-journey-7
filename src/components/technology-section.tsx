@@ -33,12 +33,7 @@ export function TechnologySection() {
           ))}
         </div>
 
-        <div className="mt-10 border border-red-500/20 rounded-lg p-6 bg-red-500/5 text-center">
-          <p className="font-bebas text-2xl text-red-400 mb-2">Приём заявок</p>
-          <p className="font-geist text-white/60 text-sm">
-            Информация о приёме заявок на следующий фестиваль появится здесь. Следите за обновлениями в наших соцсетях.
-          </p>
-        </div>
+
       </div>
     </section>
   )

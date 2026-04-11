@@ -2,29 +2,40 @@ import { useState } from "react"
 import Icon from "@/components/ui/icon"
 import { Button } from "@/components/ui/button"
 
+const sharedSessions = [
+  { time: "18:30", title: "Сбор гостей", desc: "Встреча участников и гостей фестиваля. Небольшой фуршет.", type: "talk" },
+  { time: "19:00", title: "Показ фильмов", desc: "Конкурсная программа короткометражных фильмов на тему «Карта города».", type: "screening" },
+  { time: "20:30", title: "Обсуждение", desc: "Открытый разговор с авторами фильмов. Вопросы из зала.", type: "talk" },
+]
+
 const days = [
   {
     date: "24 апреля",
     weekday: "Четверг",
     sessions: [
-      { time: "19:00", title: "Открытие фестиваля", desc: "Торжественное открытие. Вступительное слово организаторов. Показ конкурсной программы — блок 1.", type: "opening" },
-      { time: "21:00", title: "Неформальное общение", desc: "Дискуссия с авторами фильмов. Вопросы и ответы.", type: "talk" },
+      { ...sharedSessions[0] },
+      { ...sharedSessions[1] },
+      { ...sharedSessions[2] },
+      { time: "21:30", title: "Открытие фестиваля", desc: "Торжественное открытие. Слово организаторов. Небольшой праздник.", type: "opening" },
     ],
   },
   {
     date: "25 апреля",
     weekday: "Пятница",
     sessions: [
-      { time: "19:00", title: "Конкурсная программа — блок 2", desc: "Продолжение показов основного конкурса.", type: "screening" },
-      { time: "20:30", title: "Мастер-класс", desc: "Разбор работ участников. Открытая дискуссия.", type: "workshop" },
+      { ...sharedSessions[0] },
+      { ...sharedSessions[1] },
+      { ...sharedSessions[2] },
     ],
   },
   {
     date: "26 апреля",
     weekday: "Суббота",
     sessions: [
-      { time: "18:00", title: "Финальная программа", desc: "Показ финальных работ конкурса.", type: "screening" },
-      { time: "20:00", title: "Церемония закрытия", desc: "Объявление победителей. Награждение. Финальная вечеринка.", type: "closing" },
+      { ...sharedSessions[0] },
+      { ...sharedSessions[1] },
+      { ...sharedSessions[2] },
+      { time: "21:30", title: "Церемония закрытия", desc: "Объявление победителей. Награждение. Финальная вечеринка.", type: "closing" },
     ],
   },
 ]
@@ -45,9 +56,6 @@ export function ApplicationsTimeline() {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="font-bebas text-5xl md:text-7xl text-white tracking-wide">Расписание показов</h2>
-          <p className="font-geist text-white/40 text-sm mt-2 tracking-widest uppercase">
-            ГЭС 9/02 · Проспект Мусы Джалиля 51 · Этаж 4 · 420 кабинет
-          </p>
         </div>
 
         <div className="flex gap-2 md:gap-4 mb-10 justify-center">
