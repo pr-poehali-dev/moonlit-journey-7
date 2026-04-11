@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
 import { CityMapBackground } from "@/components/city-map-background"
 
 const FLYER_URL = "https://cdn.poehali.dev/projects/59266136-7b6c-414f-a200-d1fd1000076c/bucket/8b7aa1a5-cce5-49f4-9034-39e37035d7fa.jpg"
 
-interface FlyingFlyer {
+interface Flyer {
   id: number
   x: number
   y: number
@@ -15,8 +15,10 @@ interface FlyingFlyer {
   vy: number
   vr: number
   opacity: number
-  phase: "flying" | "stopping" | "stopped" | "leaving"
-  delay: number
+  // индивидуальная "волна" для плавного дрейфа
+  waveOffset: number
+  waveSpeed: number
+  waveAmp: number
 }
 
 function useOnce(key: string) {
@@ -32,88 +34,193 @@ function useOnce(key: string) {
 
 export function FlyerAnimation({ onDone }: { onDone: () => void }) {
   const [phase, setPhase] = useState<"intro" | "center" | "leave" | "done">("intro")
-  const [flyers, setFlyers] = useState<FlyingFlyer[]>(() =>
-    Array.from({ length: 12 }, (_, i) => ({
+  // время для волн
+  const timeRef = useRef(0)
+  // флаги для анимации приклеенного флаера
+  const [centerRotation, setCenterRotation] = useState(-2)
+
+  const [flyers] = useState<Flyer[]>(() =>
+    Array.from({ length: 14 }, (_, i) => ({
       id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      rotation: (Math.random() - 0.5) * 60,
-      scale: 0.3 + Math.random() * 0.4,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      vr: (Math.random() - 0.5) * 2,
-      opacity: 0.6 + Math.random() * 0.4,
-      phase: "flying",
-      delay: i * 80,
+      x: Math.random() * 110 - 5,
+      y: Math.random() * 110 - 5,
+      rotation: (Math.random() - 0.5) * 35,
+      scale: 0.18 + Math.random() * 0.28,
+      vx: (Math.random() - 0.5) * 0.08,   // очень медленно — ветер
+      vy: -0.04 - Math.random() * 0.06,    // слегка вверх, как листовки
+      vr: (Math.random() - 0.5) * 0.4,
+      opacity: 0.25 + Math.random() * 0.55,
+      waveOffset: Math.random() * Math.PI * 2,
+      waveSpeed: 0.4 + Math.random() * 0.6,
+      waveAmp: 0.015 + Math.random() * 0.025,
     }))
   )
 
+  // позиции через requestAnimationFrame
+  const [positions, setPositions] = useState(() =>
+    flyers.map(f => ({ x: f.x, y: f.y, rotation: f.rotation }))
+  )
+
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase("center"), 1800)
-    const t2 = setTimeout(() => setPhase("leave"), 9000)
-    const t3 = setTimeout(() => { setPhase("done"); onDone() }, 10200)
+    const t1 = setTimeout(() => setPhase("center"), 2200)
+    const t2 = setTimeout(() => setPhase("leave"), 9500)
+    const t3 = setTimeout(() => { setPhase("done"); onDone() }, 11200)
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3) }
   }, [onDone])
 
+  // плавная анимация полёта — RAF
   useEffect(() => {
     if (phase !== "intro") return
-    const interval = setInterval(() => {
-      setFlyers(prev => prev.map(f => ({
-        ...f,
-        x: (f.x + f.vx + 100) % 100,
-        y: (f.y + f.vy + 100) % 100,
-        rotation: f.rotation + f.vr,
-      })))
-    }, 50)
-    return () => clearInterval(interval)
+    let raf: number
+    const tick = () => {
+      timeRef.current += 0.016
+      const t = timeRef.current
+      setPositions(prev =>
+        prev.map((p, i) => {
+          const f = flyers[i]
+          // дрейф + синусоидальное колебание (ветер)
+          const nx = p.x + f.vx + Math.sin(t * f.waveSpeed + f.waveOffset) * f.waveAmp
+          const ny = p.y + f.vy + Math.cos(t * f.waveSpeed * 0.7 + f.waveOffset) * f.waveAmp * 0.5
+          const nr = p.rotation + f.vr * 0.3 + Math.sin(t * f.waveSpeed + f.waveOffset) * 0.3
+          return {
+            x: ((nx % 120) + 120) % 120,
+            y: ((ny % 120) + 120) % 120,
+            rotation: nr,
+          }
+        })
+      )
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [phase, flyers])
+
+  // покачивание приклеенного флаера на ветру
+  useEffect(() => {
+    if (phase !== "center") return
+    let raf: number
+    let t = 0
+    const tick = () => {
+      t += 0.018
+      // мягкое покачивание: от -3 до +3 градусов
+      setCenterRotation(-2 + Math.sin(t * 0.9) * 2.5 + Math.sin(t * 1.7) * 1.2)
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
   }, [phase])
 
   if (phase === "done") return null
 
   return (
-    <div className="fixed inset-0 z-[10000] bg-black/90 overflow-hidden flex items-center justify-center">
-      {flyers.map((f) => (
+    <div className="fixed inset-0 z-[10000] bg-black/92 overflow-hidden flex items-center justify-center">
+
+      {/* Фоновые летящие флаеры */}
+      {phase === "intro" && flyers.map((f, i) => (
         <div
           key={f.id}
-          className="absolute transition-all"
+          className="absolute pointer-events-none"
           style={{
-            left: phase === "intro" ? `${f.x}%` : "50%",
-            top: phase === "intro" ? `${f.y}%` : "50%",
-            transform: phase === "intro"
-              ? `translate(-50%, -50%) rotate(${f.rotation}deg) scale(${f.scale})`
-              : phase === "center"
-              ? `translate(-50%, -50%) rotate(${f.id === 0 ? -2 : f.rotation}deg) scale(${f.id === 0 ? 0 : 0})`
-              : `translate(-50%, -50%) rotate(${f.rotation + 180}deg) scale(0.1)`,
-            opacity: phase === "intro" ? f.opacity : 0,
-            transition: phase === "intro" ? "none" : `all ${f.id === 0 ? 0.8 : 0.5}s ease-in-out`,
-            transitionDelay: phase === "intro" ? "0ms" : `${f.id * 30}ms`,
-            width: "180px",
-            zIndex: f.id === 0 ? 2 : 1,
+            left: `${positions[i].x}%`,
+            top: `${positions[i].y}%`,
+            transform: `translate(-50%, -50%) rotate(${positions[i].rotation}deg) scale(${f.scale})`,
+            opacity: f.opacity,
+            width: "220px",
+            willChange: "transform",
           }}
         >
-          <img src={FLYER_URL} alt="флаер" className="w-full h-auto rounded shadow-2xl" draggable={false} />
+          <img
+            src={FLYER_URL}
+            alt="флаер"
+            className="w-full h-auto rounded shadow-xl"
+            draggable={false}
+            style={{ filter: "brightness(0.75)" }}
+          />
         </div>
       ))}
 
+      {/* Флаеры улетают при переходе к центру */}
+      {phase !== "intro" && flyers.map((f, i) => (
+        <div
+          key={f.id}
+          className="absolute pointer-events-none"
+          style={{
+            left: `${positions[i].x}%`,
+            top: `${positions[i].y}%`,
+            transform: `translate(-50%, -50%) rotate(${positions[i].rotation + 20}deg) scale(${f.scale * 0.3})`,
+            opacity: 0,
+            width: "220px",
+            transition: `all 1.2s cubic-bezier(0.4, 0, 0.2, 1)`,
+            transitionDelay: `${i * 40}ms`,
+          }}
+        >
+          <img src={FLYER_URL} alt="" className="w-full h-auto rounded" draggable={false} />
+        </div>
+      ))}
+
+      {/* Приклеенный флаер по центру */}
       <div
-        className="relative z-10 transition-all duration-700"
+        className="relative z-20 flex flex-col items-center"
         style={{
           opacity: phase === "center" ? 1 : 0,
-          transform: phase === "center" ? "scale(1) translateY(0)" : "scale(0.8) translateY(30px)",
-          transitionDelay: phase === "center" ? "0.5s" : "0s",
+          transform: phase === "center"
+            ? "scale(1) translateY(0)"
+            : phase === "leave"
+            ? "scale(0.85) translateY(-40px) rotate(8deg)"
+            : "scale(0.85) translateY(30px)",
+          transition: phase === "leave"
+            ? "all 1.4s cubic-bezier(0.4, 0, 0.2, 1)"
+            : "all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1)",
+          transitionDelay: phase === "center" ? "0.3s" : "0s",
+          pointerEvents: "none",
         }}
       >
-        <div className="relative max-w-xs mx-auto" style={{ filter: "drop-shadow(0 0 60px rgba(239,68,68,0.4))" }}>
-          <img src={FLYER_URL} alt="ОКИНО — Карта города" className="w-full h-auto rounded-lg shadow-2xl" draggable={false} />
+        {/* Скотч сверху */}
+        <div
+          className="absolute -top-3 left-1/2 -translate-x-1/2 z-30"
+          style={{
+            width: "60px",
+            height: "18px",
+            background: "rgba(210, 190, 230, 0.55)",
+            transform: `translateX(-50%) rotate(${centerRotation * 0.3}deg)`,
+            borderRadius: "2px",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+          }}
+        />
+        <div
+          className="relative"
+          style={{
+            transform: `rotate(${centerRotation}deg)`,
+            transformOrigin: "50% 0%", // качается от верхнего края (где скотч)
+            transition: "transform 0.05s linear",
+            filter: "drop-shadow(0 20px 60px rgba(0,0,0,0.7)) drop-shadow(0 0 40px rgba(239,68,68,0.2))",
+            width: "min(280px, 80vw)",
+          }}
+        >
+          <img
+            src={FLYER_URL}
+            alt="ОКИНО — Карта города"
+            className="w-full h-auto rounded-sm shadow-2xl"
+            draggable={false}
+          />
         </div>
-        <p className="text-white/50 text-center text-xs mt-4 font-geist tracking-widest animate-pulse">
+        <p
+          className="font-geist text-white/40 text-xs mt-5 tracking-widest"
+          style={{
+            opacity: phase === "center" ? 1 : 0,
+            transition: "opacity 0.5s ease",
+            transitionDelay: "1.5s",
+            animation: "pulse 2.5s ease-in-out infinite",
+          }}
+        >
           нажмите, чтобы продолжить
         </p>
       </div>
 
+      {/* Клик-зона */}
       <button
-        className="absolute inset-0 w-full h-full cursor-pointer"
-        onClick={() => { setPhase("leave"); setTimeout(onDone, 800) }}
+        className="absolute inset-0 w-full h-full cursor-pointer z-10"
+        onClick={() => { setPhase("leave"); setTimeout(onDone, 1000) }}
         aria-label="Закрыть"
       />
     </div>
