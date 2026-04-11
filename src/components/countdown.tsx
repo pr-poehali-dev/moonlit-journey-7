@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const FESTIVAL_DATE = new Date("2025-04-24T19:00:00")
+const FESTIVAL_DATE = new Date("2026-04-24T14:00:00")
 
 function getTimeLeft() {
   const now = new Date()
@@ -50,34 +50,32 @@ export function Countdown() {
   if (time === null) return null
 
   return (
-    <section className="bg-black relative overflow-hidden py-10 px-4">
-      <div className="max-w-3xl mx-auto">
-        {/* Заголовок */}
-        <p className="font-ui text-red-500 text-[10px] tracking-[0.5em] text-center mb-6 uppercase">
+    <section className="bg-black relative overflow-hidden py-14 px-4 border-y border-white/5">
+      <div className="max-w-3xl mx-auto text-center">
+
+        <p className="font-ui text-red-500 text-[10px] tracking-[0.5em] mb-8 uppercase">
           До начала фестиваля
         </p>
 
         {/* Счётчик */}
-        <div className="flex items-start justify-center gap-4 md:gap-8">
-          <Digit value={time.days}    label="дней"    />
-          <span className="font-bebas text-4xl md:text-6xl text-red-500/60 leading-none mt-1 select-none">:</span>
-          <Digit value={time.hours}   label="часов"   />
-          <span className="font-bebas text-4xl md:text-6xl text-red-500/60 leading-none mt-1 select-none">:</span>
-          <Digit value={time.minutes} label="минут"   />
-          <span className="font-bebas text-4xl md:text-6xl text-red-500/60 leading-none mt-1 select-none">:</span>
-          <Digit value={time.seconds} label="секунд"  />
+        <div className="flex items-start justify-center gap-3 md:gap-10">
+          <Digit value={time.days}    label="дней"   />
+          <span className="font-heading text-4xl md:text-6xl text-red-500/50 leading-none mt-1 select-none font-light">:</span>
+          <Digit value={time.hours}   label="часов"  />
+          <span className="font-heading text-4xl md:text-6xl text-red-500/50 leading-none mt-1 select-none font-light">:</span>
+          <Digit value={time.minutes} label="минут"  />
+          <span className="font-heading text-4xl md:text-6xl text-red-500/50 leading-none mt-1 select-none font-light">:</span>
+          <Digit value={time.seconds} label="секунд" />
         </div>
 
-        {/* Дата */}
-        <p className="font-geist text-white/30 text-sm text-center mt-6 tracking-wider">
-          24 апреля · 19:00 · Набережные Челны
+        <p className="font-geist text-white/25 text-sm mt-8 tracking-wider">
+          24–26 апреля · 14:00 и 18:00 · Набережные Челны
         </p>
 
-        {/* Разделитель */}
         <div className="flex items-center gap-4 mt-8">
-          <div className="flex-1 h-px bg-white/8" />
+          <div className="flex-1 h-px bg-white/6" />
           <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-          <div className="flex-1 h-px bg-white/8" />
+          <div className="flex-1 h-px bg-white/6" />
         </div>
       </div>
     </section>
