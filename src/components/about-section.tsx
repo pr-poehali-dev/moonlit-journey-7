@@ -14,8 +14,12 @@ export function AboutSection() {
             <p className="font-geist text-white/70 text-xl leading-relaxed mb-4">
               Андеграундное АРТ-пространство для кино, искусства и творческих мероприятий от местных авторов.
             </p>
-            <p className="font-geist text-white/50 leading-relaxed mb-8">
-              Тема «Карта города» — про маршруты, которые мы выбираем. Про места, которые нас формируют. Про людей, которых мы встречаем на этих улицах.
+            <p className="font-geist text-white/60 leading-relaxed mb-4">
+              «Карта Города» — это сборник из короткометражных фильмов, в котором каждый автор строит свою историю вокруг определённой локации. Это попытка почувствовать город через отдельные места, состояния и истории — через локации, которые становятся не просто фоном, а частью самого высказывания.
+            </p>
+            <p className="font-geist text-white/45 leading-relaxed mb-8">
+              Обратите внимание на расписание: в дни фестиваля один и тот же сборник будет показан дважды — в 14:00 и в 18:00. Вы можете выбрать удобное для себя время.<br /><br />
+              Советуем взять билеты заранее — места ограничены!
             </p>
             <div className="flex gap-4 flex-wrap">
               {[
@@ -39,9 +43,9 @@ export function AboutSection() {
 
           <div className="flex flex-col gap-4">
             {[
-              { label: "Участников", value: "—", sub: "авторов фильмов" },
-              { label: "Короткометражек", value: "—", sub: "в конкурсной программе" },
-              { label: "Дней фестиваля", value: "3", sub: "24, 25, 26 апреля" },
+              { label: "Авторов", value: "14", sub: "участников фестиваля" },
+              { label: "Фильмов", value: "14", sub: "в двух блоках программы" },
+              { label: "Дней показов", value: "3", sub: "24, 25, 26 апреля" },
             ].map((stat, i) => (
               <div key={i} className="border border-white/8 rounded-lg p-5 flex items-center gap-5 bg-zinc-950/60">
                 <div className="font-heading text-4xl text-red-500 w-16 text-center">{stat.value}</div>
