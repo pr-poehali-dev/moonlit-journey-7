@@ -1,125 +1,39 @@
-import { Github, Twitter, Linkedin, Mail } from "lucide-react"
-
 export function Footer() {
   return (
-    <footer className="bg-black border-t border-red-500/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="col-span-1 md:col-span-2">
-            <h2 className="font-orbitron text-2xl font-bold text-white mb-4">
-              Synapse<span className="text-red-500">AI</span>
-            </h2>
-            <p className="font-space-mono text-gray-300 mb-6 max-w-md">
-              Продвигаем будущее нейросвязи с передовыми технологиями интерфейса мозг-компьютер.
+    <footer className="py-10 px-4 bg-black border-t border-white/5">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <div className="text-right leading-none">
+              <div className="font-bebas text-red-500 text-xs tracking-widest">ОКИНО</div>
+              <div className="font-bebas text-red-500 text-xs tracking-widest">ОКИНО</div>
+              <div className="font-bebas text-red-500 text-xs tracking-widest">ОКИНО</div>
+            </div>
+            <div className="w-px h-8 bg-white/10" />
+            <div>
+              <p className="font-bebas text-white tracking-widest text-sm">КАРТА ГОРОДА</p>
+              <p className="font-geist text-white/30 text-xs">Фестиваль короткометражного кино</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center md:items-end gap-2">
+            <div className="flex gap-4">
+              <a href="https://vk.com/okino.square" target="_blank" rel="noopener noreferrer"
+                className="font-geist text-white/40 hover:text-red-500 transition-colors text-xs">
+                vk.com/okino.square
+              </a>
+              <span className="text-white/10">·</span>
+              <a href="https://t.me/okinosquare" target="_blank" rel="noopener noreferrer"
+                className="font-geist text-white/40 hover:text-red-500 transition-colors text-xs">
+                t.me/okinosquare
+              </a>
+            </div>
+            <p className="font-geist text-white/20 text-xs text-center">
+              ГЭС 9/02 · Проспект Мусы Джалиля 51 · Этаж 4 · 420 кабинет
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-red-500 transition-colors duration-200">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-red-500 transition-colors duration-200">
-                <Github size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-red-500 transition-colors duration-200">
-                <Linkedin size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-red-500 transition-colors duration-200">
-                <Mail size={20} />
-              </a>
-            </div>
-          </div>
-
-          {/* Product */}
-          <div>
-            <h3 className="font-orbitron text-white font-semibold mb-4">Продукт</h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#technology"
-                  className="font-space-mono text-gray-400 hover:text-red-500 transition-colors duration-200"
-                >
-                  Технологии
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#applications"
-                  className="font-space-mono text-gray-400 hover:text-red-500 transition-colors duration-200"
-                >
-                  Применения
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#safety"
-                  className="font-space-mono text-gray-400 hover:text-red-500 transition-colors duration-200"
-                >
-                  Безопасность
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#faq"
-                  className="font-space-mono text-gray-400 hover:text-red-500 transition-colors duration-200"
-                >
-                  Вопросы
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h3 className="font-orbitron text-white font-semibold mb-4">Компания</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="font-space-mono text-gray-400 hover:text-red-500 transition-colors duration-200">
-                  О нас
-                </a>
-              </li>
-              <li>
-                <a href="#" className="font-space-mono text-gray-400 hover:text-red-500 transition-colors duration-200">
-                  Карьера
-                </a>
-              </li>
-              <li>
-                <a href="#" className="font-space-mono text-gray-400 hover:text-red-500 transition-colors duration-200">
-                  Пресса
-                </a>
-              </li>
-              <li>
-                <a href="#" className="font-space-mono text-gray-400 hover:text-red-500 transition-colors duration-200">
-                  Контакты
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="mt-8 pt-8 border-t border-red-500/20">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="font-space-mono text-gray-400 text-sm">2025 SynapseAI. Все права защищены.</p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <a
-                href="#"
-                className="font-space-mono text-gray-400 hover:text-red-500 text-sm transition-colors duration-200"
-              >
-                Конфиденциальность
-              </a>
-              <a
-                href="#"
-                className="font-space-mono text-gray-400 hover:text-red-500 text-sm transition-colors duration-200"
-              >
-                Условия использования
-              </a>
-              <a
-                href="#"
-                className="font-space-mono text-gray-400 hover:text-red-500 text-sm transition-colors duration-200"
-              >
-                Cookie-политика
-              </a>
-            </div>
+            <p className="font-geist text-white/15 text-xs">
+              24–26 апреля · 18+ · © ОКИНО 2025
+            </p>
           </div>
         </div>
       </div>
