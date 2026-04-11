@@ -37,6 +37,12 @@ export function CTASection() {
               VK
             </Button>
           </a>
+          <a href="https://t.me/okinosquare" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" className="border-white/60 text-white bg-transparent hover:bg-white/10 font-ui text-xs px-6 py-3 tracking-widest w-full sm:w-auto">
+              <Icon name="Send" size={15} className="mr-2" />
+              Telegram
+            </Button>
+          </a>
           <a href="https://youtube.com/@okino.square" target="_blank" rel="noopener noreferrer">
             <Button variant="outline" className="border-white/60 text-white bg-transparent hover:bg-white/10 font-ui text-xs px-6 py-3 tracking-widest w-full sm:w-auto">
               <Icon name="Youtube" size={15} className="mr-2" />
