@@ -9,6 +9,7 @@ import { FAQSection } from "@/components/faq-section"
 import { CTASection } from "@/components/cta-section"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { Countdown } from "@/components/countdown"
 
 export default function Index() {
   return (
@@ -16,6 +17,7 @@ export default function Index() {
       <Navbar />
       <main>
         <Hero3D />
+        <Countdown />
         <AboutSection />
         <section id="technology">
           <TechnologySection />
