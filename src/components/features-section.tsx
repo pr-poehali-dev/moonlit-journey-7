@@ -159,21 +159,35 @@ export function FeaturesSection() {
         {/* Карта */}
         <div
           className="relative rounded-lg overflow-hidden border border-white/10"
-          style={{ height: "520px", background: "#090909" }}
+          style={{
+            height: "520px",
+            background: "#090909",
+            backgroundImage: `
+              radial-gradient(ellipse 90% 80% at 50% 45%, rgba(60,60,60,0.15) 0%, transparent 70%),
+              linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+              linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)
+            `,
+            backgroundSize: "auto, 60px 60px, 60px 60px, 15px 15px, 15px 15px",
+          }}
         >
-          {/* Сетка улиц внутри карты */}
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            {/* Горизонтальные */}
-            {[20,35,50,65,80].map(y => (
-              <line key={`h${y}`} x1="0" y1={y} x2="100" y2={y} stroke="white" strokeWidth="0.15" strokeOpacity="0.2" />
-            ))}
-            {/* Вертикальные */}
-            {[20,35,50,65,80].map(x => (
-              <line key={`v${x}`} x1={x} y1="0" x2={x} y2="100" stroke="white" strokeWidth="0.15" strokeOpacity="0.2" />
-            ))}
-            {/* Разделитель блоков */}
-            <line x1="50" y1="0" x2="50" y2="100" stroke="#ef4444" strokeWidth="0.2" strokeOpacity="0.25" strokeDasharray="2 3" />
+          {/* Декоративный SVG — круги и маршруты */}
+          <svg className="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+            <circle cx="200" cy="200" r="160" stroke="white" strokeWidth="0.5" fill="none" />
+            <circle cx="200" cy="200" r="110" stroke="white" strokeWidth="0.5" fill="none" />
+            <circle cx="200" cy="200" r="60"  stroke="white" strokeWidth="0.5" fill="none" />
+            <line x1="40"  y1="200" x2="360" y2="200" stroke="white" strokeWidth="0.5" />
+            <line x1="200" y1="40"  x2="200" y2="360" stroke="white" strokeWidth="0.5" />
+            <path d="M200 40 Q240 100 270 140 Q310 180 360 200 Q310 220 270 260 Q240 300 200 360 Q160 300 130 260 Q90 220 40 200 Q90 180 130 140 Q160 100 200 40Z" stroke="white" strokeWidth="0.3" fill="none" opacity="0.5" />
+            <path d="M100 80  Q140 120 170 160 Q185 180 190 200" stroke="white" strokeWidth="0.4" fill="none" opacity="0.6" />
+            <path d="M300 80  Q260 120 230 160 Q215 180 210 200" stroke="white" strokeWidth="0.4" fill="none" opacity="0.6" />
+            <path d="M80  300 Q130 280 170 250 Q185 225 200 215" stroke="white" strokeWidth="0.4" fill="none" opacity="0.6" />
+            <path d="M320 300 Q270 280 230 250 Q215 225 200 215" stroke="white" strokeWidth="0.4" fill="none" opacity="0.6" />
           </svg>
+
+          {/* Разделитель блоков */}
+          <div className="absolute inset-y-0 left-1/2 w-px bg-red-500/15" style={{ borderLeft: "1px dashed rgba(239,68,68,0.2)" }} />
 
           {/* Подписи блоков */}
           <div className="absolute top-3 left-[25%] -translate-x-1/2 font-ui text-[9px] text-red-500/50 tracking-widest">БЛОК 1</div>
