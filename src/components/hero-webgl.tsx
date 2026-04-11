@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
 import { CityMapBackground } from "@/components/city-map-background"
@@ -16,251 +16,135 @@ function useOnce(key: string) {
   return [shown, markShown] as const
 }
 
-// Одна частица флаера в 3D-пространстве
-interface Particle {
-  // позиция в "мировом" пространстве: x,y в [-1..1], z в [0..1] (0=далеко, 1=близко)
-  x: number
-  y: number
-  z: number
-  vx: number   // скорость по x (ветер)
-  vy: number   // скорость по y
-  vz: number   // скорость приближения
-  rot: number  // текущий угол
-  vr: number   // скорость вращения
-  // волновые параметры для колебания на ветру
-  wo: number   // wave offset
-  ws: number   // wave speed
-  wa: number   // wave amplitude (угол)
-  baseRot: number
-}
-
-function makeParticles(count: number): Particle[] {
-  return Array.from({ length: count }, () => ({
-    x: (Math.random() - 0.5) * 2.4,
-    y: (Math.random() - 0.5) * 2.4,
-    z: Math.random() * 0.6,          // начинают вдали
-    vx: (Math.random() - 0.5) * 0.0015,
-    vy: (Math.random() - 0.5) * 0.001,
-    vz: 0.0008 + Math.random() * 0.0012,  // медленно летят на зрителя
-    rot: (Math.random() - 0.5) * 40,
-    vr: (Math.random() - 0.5) * 0.08,
-    wo: Math.random() * Math.PI * 2,
-    ws: 0.5 + Math.random() * 1.0,
-    wa: 1.5 + Math.random() * 3,
-    baseRot: (Math.random() - 0.5) * 40,
-  }))
-}
+// Параметры фоновых флаеров — фиксированные, не меняются между рендерами
+const BG_FLYERS = [
+  { id:0,  x:8,   y:12,  rot:-18, s0:0.10, s1:0.26, dur:7.0, delay:0.0, op:0.55 },
+  { id:1,  x:72,  y:5,   rot: 22, s0:0.08, s1:0.20, dur:8.5, delay:0.4, op:0.45 },
+  { id:2,  x:40,  y:18,  rot:-8,  s0:0.12, s1:0.30, dur:6.5, delay:0.8, op:0.60 },
+  { id:3,  x:85,  y:30,  rot: 35, s0:0.09, s1:0.22, dur:9.0, delay:0.2, op:0.40 },
+  { id:4,  x:15,  y:55,  rot:-25, s0:0.11, s1:0.28, dur:7.5, delay:1.0, op:0.50 },
+  { id:5,  x:60,  y:48,  rot: 12, s0:0.07, s1:0.18, dur:8.0, delay:0.6, op:0.38 },
+  { id:6,  x:90,  y:62,  rot:-15, s0:0.13, s1:0.32, dur:7.2, delay:1.4, op:0.52 },
+  { id:7,  x:28,  y:80,  rot: 28, s0:0.09, s1:0.24, dur:8.8, delay:0.3, op:0.42 },
+  { id:8,  x:55,  y:75,  rot:-32, s0:0.10, s1:0.27, dur:6.8, delay:1.1, op:0.48 },
+  { id:9,  x:78,  y:85,  rot: 18, s0:0.08, s1:0.21, dur:9.2, delay:0.7, op:0.36 },
+  { id:10, x:20,  y:35,  rot:-10, s0:0.11, s1:0.29, dur:7.8, delay:1.6, op:0.44 },
+  { id:11, x:50,  y:90,  rot: 40, s0:0.09, s1:0.23, dur:8.3, delay:0.9, op:0.46 },
+]
 
 export function FlyerAnimation({ onDone }: { onDone: () => void }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const phaseRef = useRef<"fly" | "freeze" | "leave">("fly")
-  const [phase, setPhase] = useState<"fly" | "freeze" | "leave" | "done">("fly")
-  const particles = useRef<Particle[]>(makeParticles(18))
-  const imgRef = useRef<HTMLImageElement | null>(null)
-  const rafRef = useRef<number>(0)
-  const tRef = useRef(0)
-  // данные приклеенного флаера
-  const pinnedRef = useRef({ rot: -2, t: 0 })
+  const [phase, setPhase] = useState<"fly" | "pinned" | "leave" | "done">("fly")
 
-  // Загружаем картинку
   useEffect(() => {
-    const img = new Image()
-    img.crossOrigin = "anonymous"
-    img.src = FLYER_URL
-    img.onload = () => { imgRef.current = img }
-  }, [])
-
-  // Таймеры фаз
-  useEffect(() => {
-    const t1 = setTimeout(() => { phaseRef.current = "freeze"; setPhase("freeze") }, 2800)
-    const t2 = setTimeout(() => { phaseRef.current = "leave";  setPhase("leave") },  9800)
-    const t3 = setTimeout(() => { setPhase("done"); onDone() }, 11400)
+    const t1 = setTimeout(() => setPhase("pinned"), 3500)
+    const t2 = setTimeout(() => setPhase("leave"),  10500)
+    const t3 = setTimeout(() => { setPhase("done"); onDone() }, 12000)
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3) }
   }, [onDone])
 
-  // RAF рендер на canvas
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    const resize = () => {
-      canvas.width  = window.innerWidth
-      canvas.height = window.innerHeight
-    }
-    resize()
-    window.addEventListener("resize", resize)
-
-    const ASPECT = 280 / 400  // соотношение флаера (ширина/высота)
-
-    const draw = () => {
-      const W = canvas.width
-      const H = canvas.height
-      tRef.current += 0.016
-      const t = tRef.current
-      const curPhase = phaseRef.current
-
-      ctx.clearRect(0, 0, W, H)
-
-      // Фон
-      ctx.fillStyle = "rgba(0,0,0,0.92)"
-      ctx.fillRect(0, 0, W, H)
-
-      if (!imgRef.current) {
-        rafRef.current = requestAnimationFrame(draw)
-        return
-      }
-
-      const img = imgRef.current
-      const ps = particles.current
-
-      if (curPhase === "fly") {
-        // Обновляем и рисуем все флаеры
-        for (const p of ps) {
-          // Ветровое колебание угла
-          const windRot = Math.sin(t * p.ws + p.wo) * p.wa
-                        + Math.sin(t * p.ws * 0.6 + p.wo + 1) * p.wa * 0.4
-
-          p.x   += p.vx + Math.sin(t * p.ws * 0.4 + p.wo) * 0.0006
-          p.y   += p.vy + Math.cos(t * p.ws * 0.3 + p.wo) * 0.0004
-          p.z   += p.vz
-          p.rot  = p.baseRot + windRot
-
-          // Если улетел за экран — респаун вдали
-          if (p.z > 1.05 || Math.abs(p.x) > 1.6 || Math.abs(p.y) > 1.6) {
-            p.x = (Math.random() - 0.5) * 2.4
-            p.y = (Math.random() - 0.5) * 2.4
-            p.z = 0
-            p.baseRot = (Math.random() - 0.5) * 40
-          }
-
-          // Проекция: z=0 → мелкий, z=1 → крупный
-          const scale = 0.08 + p.z * 0.55
-          const screenX = W / 2 + p.x * W * 0.5 * (0.3 + p.z * 0.7)
-          const screenY = H / 2 + p.y * H * 0.5 * (0.3 + p.z * 0.7)
-          const fw = 260 * scale
-          const fh = fw / ASPECT
-
-          const opacity = Math.min(1, p.z * 2.5) * 0.8
-
-          ctx.save()
-          ctx.translate(screenX, screenY)
-          ctx.rotate((p.rot * Math.PI) / 180)
-          ctx.globalAlpha = opacity
-          ctx.drawImage(img, -fw / 2, -fh / 2, fw, fh)
-          ctx.restore()
-        }
-      }
-
-      // Фаза "freeze" — рисуем один большой приклеенный флаер
-      if (curPhase === "freeze" || curPhase === "leave") {
-        pinnedRef.current.t += 0.018
-        const pt = pinnedRef.current.t
-
-        // Флаеры фоном — тихо улетают
-        for (const p of ps) {
-          p.x += p.vx * 0.5
-          p.y += p.vy * 0.5 - 0.001
-          p.z = Math.max(0, p.z - 0.008)
-          const scale = 0.08 + p.z * 0.55
-          const screenX = W / 2 + p.x * W * 0.4 * (0.3 + p.z * 0.7)
-          const screenY = H / 2 + p.y * H * 0.4 * (0.3 + p.z * 0.7)
-          const fw = 260 * scale
-          const fh = fw / ASPECT
-          ctx.save()
-          ctx.translate(screenX, screenY)
-          ctx.rotate((p.rot * Math.PI) / 180)
-          ctx.globalAlpha = Math.min(1, p.z * 2.5) * 0.3
-          ctx.drawImage(img, -fw / 2, -fh / 2, fw, fh)
-          ctx.restore()
-        }
-
-        // Приклеенный — покачивается на ветру
-        const windRot = Math.sin(pt * 0.9) * 2.8
-                      + Math.sin(pt * 1.7) * 1.2
-                      + Math.sin(pt * 0.4) * 0.6
-
-        const leaveProgress = curPhase === "leave" ? Math.min(1, (pt - 7) / 1.2) : 0
-        const pinX = W / 2 + leaveProgress * W * 0.6
-        const pinY = H / 2 - leaveProgress * H * 0.5
-        const pinScale = 1 - leaveProgress * 0.3
-        const pinOpacity = 1 - leaveProgress
-
-        const fw = Math.min(W * 0.55, 300) * pinScale
-        const fh = fw / ASPECT
-
-        // Тень
-        ctx.save()
-        ctx.translate(pinX + 8, pinY + 8)
-        ctx.rotate(((windRot - 2) * Math.PI) / 180)
-        ctx.globalAlpha = 0.25 * pinOpacity
-        ctx.filter = "blur(12px)"
-        ctx.drawImage(img, -fw / 2, -fh / 2, fw, fh)
-        ctx.restore()
-
-        // Сам флаер (качается от верхнего края)
-        ctx.save()
-        ctx.translate(pinX, pinY - fh * 0.45)  // pivot сверху
-        ctx.rotate(((windRot - 2) * Math.PI) / 180)
-        ctx.globalAlpha = pinOpacity
-        ctx.filter = "none"
-        // Лёгкая тень
-        ctx.shadowColor = "rgba(0,0,0,0.5)"
-        ctx.shadowBlur = 30
-        ctx.drawImage(img, -fw / 2, 0, fw, fh)
-        ctx.restore()
-
-        // Скотч
-        if (curPhase === "freeze") {
-          ctx.save()
-          ctx.translate(pinX, pinY - fh * 0.45 + 4)
-          ctx.rotate(((windRot * 0.3 - 1) * Math.PI) / 180)
-          ctx.globalAlpha = 0.5
-          ctx.fillStyle = "rgba(210,185,230,0.7)"
-          ctx.beginPath()
-          ctx.roundRect(-28, -9, 56, 16, 3)
-          ctx.fill()
-          ctx.restore()
-        }
-      }
-
-      rafRef.current = requestAnimationFrame(draw)
-    }
-
-    rafRef.current = requestAnimationFrame(draw)
-    return () => {
-      cancelAnimationFrame(rafRef.current)
-      window.removeEventListener("resize", resize)
-    }
-  }, [])
-
   if (phase === "done") return null
 
+  const flying = phase === "fly"
+  const pinned = phase === "pinned"
+  const leaving = phase === "leave"
+
   return (
-    <div className="fixed inset-0 z-[10000] overflow-hidden">
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+    <div className="fixed inset-0 z-[10000] bg-black overflow-hidden">
 
-      {/* Подпись под приклеенным флаером */}
-      {phase === "freeze" && (
+      {/* Фоновые флаеры: летят от маленьких к большим через CSS @keyframes */}
+      {BG_FLYERS.map(f => (
         <div
-          className="absolute bottom-[12%] left-1/2 -translate-x-1/2 text-center"
-          style={{ animation: "fadeIn 0.8s ease 1.5s both" }}
+          key={f.id}
+          className="absolute pointer-events-none"
+          style={{
+            left: `${f.x}%`,
+            top:  `${f.y}%`,
+            width: "280px",
+            /* Каждый флаер: анимирован keyframes flyerZoom — от мелкого к крупному */
+            animation: flying
+              ? `flyerZoom ${f.dur}s cubic-bezier(0.2, 0.0, 0.4, 1.0) ${f.delay}s both`
+              : "none",
+            /* После phase fly — плавно исчезают */
+            opacity: flying ? undefined : 0,
+            transform: flying
+              ? undefined
+              : `translate(-50%,-50%) rotate(${f.rot + 20}deg) scale(0.05)`,
+            transition: flying
+              ? "none"
+              : `opacity 1.5s ease, transform 1.8s ease`,
+            /* CSS переменные для keyframes */
+            "--rot":  `${f.rot}deg`,
+            "--s0":   `${f.s0}`,
+            "--s1":   `${f.s1}`,
+          } as React.CSSProperties}
         >
-          <p className="font-geist text-white/40 text-xs tracking-widest animate-pulse">
-            нажмите, чтобы продолжить
-          </p>
+          <img
+            src={FLYER_URL}
+            alt=""
+            style={{ width: "100%", borderRadius: "3px", filter: "brightness(0.55)" }}
+            draggable={false}
+          />
         </div>
-      )}
+      ))}
 
-      {/* Клик-зона */}
+      {/* Приклеенный флаер по центру */}
+      <div
+        className="absolute inset-0 flex items-center justify-center"
+        style={{ pointerEvents: "none" }}
+      >
+        <div style={{
+          width: "min(290px, 80vw)",
+          position: "relative",
+          /* Появление */
+          opacity: pinned || leaving ? 1 : 0,
+          /* Качание на ветру + улёт */
+          animation: pinned
+            ? "flyerWave 4.5s ease-in-out infinite"
+            : "none",
+          transform: leaving
+            ? "translateY(-55vh) translateX(8vw) rotate(14deg) scale(0.75)"
+            : "none",
+          transition: leaving
+            ? "transform 1.6s cubic-bezier(0.4,0,0.2,1), opacity 1.2s ease"
+            : "opacity 1.0s ease 0.2s",
+          transformOrigin: "50% 6px",
+          filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.8))",
+        }}>
+          {/* Скотч */}
+          <div style={{
+            position: "absolute", top: "-7px", left: "50%",
+            transform: "translateX(-50%)",
+            width: "68px", height: "17px",
+            background: "rgba(215,192,238,0.56)",
+            borderRadius: "3px",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+          }} />
+          <img
+            src={FLYER_URL}
+            alt="ОКИНО — Карта города"
+            style={{ width: "100%", borderRadius: "4px", display: "block" }}
+            draggable={false}
+          />
+        </div>
+      </div>
+
+      {/* Подпись */}
+      <p
+        className="absolute bottom-[10%] left-1/2 -translate-x-1/2 font-geist text-white/30 text-xs tracking-widest"
+        style={{
+          opacity: pinned ? 1 : 0,
+          transition: "opacity 0.8s ease 2s",
+          animation: pinned ? "pulse 2.5s ease-in-out 2s infinite" : "none",
+          whiteSpace: "nowrap",
+        }}
+      >
+        нажмите, чтобы продолжить
+      </p>
+
+      {/* Клик */}
       <button
         className="absolute inset-0 w-full h-full cursor-pointer"
-        onClick={() => {
-          phaseRef.current = "leave"
-          setPhase("leave")
-          setTimeout(onDone, 1200)
-        }}
+        onClick={() => { setPhase("leave"); setTimeout(onDone, 1400) }}
         aria-label="Закрыть"
       />
     </div>

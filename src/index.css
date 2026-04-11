@@ -278,3 +278,52 @@
     transform: translateY(-1px);
   }
 }
+
+/* Флаер покачивается на ветру — от точки крепления (скотч сверху) */
+@keyframes flyerWave {
+  0% {
+    transform: rotate(-1.5deg);
+  }
+  20% {
+    transform: rotate(2.2deg);
+  }
+  45% {
+    transform: rotate(-0.8deg);
+  }
+  65% {
+    transform: rotate(1.8deg);
+  }
+  80% {
+    transform: rotate(-2deg);
+  }
+  100% {
+    transform: rotate(-1.5deg);
+  }
+}
+
+/*
+  Флаер летит на зрителя: маленький вдали → крупнее + покачивание на ветру.
+  CSS-переменные --rot, --s0, --s1 задаются inline на элементе.
+*/
+@keyframes flyerZoom {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--rot)) scale(var(--s0));
+  }
+  12% {
+    opacity: 0.85;
+  }
+  38% {
+    transform: translate(-50%, -50%) rotate(calc(var(--rot) + 3deg))
+      scale(calc(var(--s0) + (var(--s1) - var(--s0)) * 0.38));
+  }
+  64% {
+    transform: translate(-50%, -50%) rotate(calc(var(--rot) - 2deg))
+      scale(calc(var(--s0) + (var(--s1) - var(--s0)) * 0.64));
+  }
+  100% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) rotate(calc(var(--rot) + 1deg))
+      scale(var(--s1));
+  }
+}
