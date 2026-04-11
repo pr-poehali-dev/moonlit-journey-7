@@ -3,7 +3,7 @@ import { CityMapBackground } from "@/components/city-map-background"
 export function AboutSection() {
   return (
     <section id="about" className="py-20 px-4 bg-black relative overflow-hidden">
-      <CityMapBackground opacity={0.04} />
+      <CityMapBackground opacity={0.22} />
       <div className="max-w-5xl mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>

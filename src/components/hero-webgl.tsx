@@ -164,7 +164,7 @@ export function Hero3DWebGL() {
     <>
       {showAnim && <FlyerAnimation onDone={handleAnimDone} />}
       <section id="okino" className="min-h-screen bg-black relative overflow-hidden flex flex-col items-center justify-center">
-        <CityMapBackground opacity={0.06} />
+        <CityMapBackground opacity={0.28} />
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent z-10" />
           <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black to-transparent z-10" />

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Icon from "@/components/ui/icon"
 import { Badge } from "@/components/ui/badge"
+import { CityMapBackground } from "@/components/city-map-background"
 
 interface Film {
   id: number
@@ -85,8 +86,9 @@ export function FeaturesSection() {
   }
 
   return (
-    <section id="films" className="py-20 px-4 bg-black">
-      <div className="max-w-6xl mx-auto">
+    <section id="films" className="py-20 px-4 bg-black relative overflow-hidden">
+      <CityMapBackground opacity={0.20} />
+      <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-10">
           <h2 className="font-bebas text-5xl md:text-7xl text-white tracking-wide">Карта фильмов</h2>
           <p className="font-geist text-white/50 text-sm mt-2 tracking-widest uppercase">

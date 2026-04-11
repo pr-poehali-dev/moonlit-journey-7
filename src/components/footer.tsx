@@ -3,7 +3,7 @@ import { CityMapBackground } from "@/components/city-map-background"
 export function Footer() {
   return (
     <footer className="py-10 px-4 bg-black border-t border-white/5 relative overflow-hidden">
-      <CityMapBackground opacity={0.03} />
+      <CityMapBackground opacity={0.18} />
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">

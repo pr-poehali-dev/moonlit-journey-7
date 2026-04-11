@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Icon from "@/components/ui/icon"
+import { CityMapBackground } from "@/components/city-map-background"
 
 const faqs = [
   { q: "Кто может участвовать в фестивале?", a: "Любой желающий — профессиональные режиссёры, студенты киношкол и полные любители. Главное требование — фильм должен соответствовать теме «Карта города»." },
@@ -14,8 +15,9 @@ export function FAQSection() {
   const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <section id="faq" className="py-20 px-4 bg-zinc-950">
-      <div className="max-w-3xl mx-auto">
+    <section id="faq" className="py-20 px-4 bg-zinc-950 relative overflow-hidden">
+      <CityMapBackground opacity={0.18} />
+      <div className="max-w-3xl mx-auto relative z-10">
         <div className="text-center mb-12">
           <p className="font-bebas text-red-500 text-sm tracking-[0.4em] mb-3">ВОПРОСЫ И ОТВЕТЫ</p>
           <h2 className="font-bebas text-5xl md:text-6xl text-white tracking-wide">FAQ</h2>
