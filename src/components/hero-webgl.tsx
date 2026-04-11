@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
-import { OkinoLogo } from "@/components/navbar"
+import { CityMapBackground } from "@/components/city-map-background"
 
 const FLYER_URL = "https://cdn.poehali.dev/projects/59266136-7b6c-414f-a200-d1fd1000076c/bucket/8b7aa1a5-cce5-49f4-9034-39e37035d7fa.jpg"
 
@@ -132,29 +132,18 @@ export function Hero3DWebGL() {
   return (
     <>
       {showAnim && <FlyerAnimation onDone={handleAnimDone} />}
-      <section
-        className="min-h-screen bg-black relative overflow-hidden flex flex-col items-center justify-center city-map-bg"
-        style={{
-          backgroundImage: `
-            radial-gradient(ellipse 80% 60% at 50% 40%, rgba(180,180,180,0.07) 0%, transparent 70%),
-            linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px),
-            linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px)
-          `,
-          backgroundSize: "auto, 80px 80px, 80px 80px, 20px 20px, 20px 20px",
-        }}
-      >
+      <section id="okino" className="min-h-screen bg-black relative overflow-hidden flex flex-col items-center justify-center">
+        <CityMapBackground opacity={0.06} />
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent z-10" />
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black to-transparent z-10" />
         </div>
 
         <div className="relative z-10 text-center px-4 flex flex-col items-center">
-          <div className="mb-4 flex items-center gap-4">
-            <span className="font-geist text-red-500 text-xs tracking-[0.3em] font-light">18+</span>
-            <OkinoLogo size={52} />
-            <span className="font-geist text-white/40 text-xs tracking-widest uppercase">Любительское кино</span>
+          <div className="mb-4 flex items-center gap-3">
+            <span className="font-ui text-red-500 text-xs tracking-[0.3em]">18+</span>
+            <span className="w-px h-4 bg-white/20" />
+            <span className="font-ui text-white/30 text-xs tracking-widest">Любительское кино</span>
           </div>
 
           <div className="relative mb-2">
@@ -179,32 +168,35 @@ export function Hero3DWebGL() {
             ГОРОДА
           </h1>
 
-          <p className="font-bebas text-red-500 text-xl md:text-2xl tracking-[0.25em] mt-2">
+          <p className="font-ui text-red-500 text-sm tracking-[0.3em] mt-2">
             ФЕСТИВАЛЬ КОРОТКОМЕТРАЖНОГО КИНО
           </p>
 
           <div className="mt-6 tape-effect inline-block bg-white text-black px-6 py-2 rounded-sm shadow-lg">
-            <span className="font-space-mono text-sm md:text-base font-bold tracking-wider">24 / 25 / 26 АПРЕЛЯ</span>
+            <span className="font-ui text-sm font-bold tracking-wider">24 / 25 / 26 АПРЕЛЯ</span>
           </div>
 
-          <div className="flex gap-4 mt-8">
-            <Button className="bg-red-600 hover:bg-red-700 text-white font-geist px-8 py-3 text-base border-0">
+          <div className="flex gap-3 mt-8">
+            <Button className="bg-red-600 hover:bg-red-700 text-white font-ui border-0 text-xs tracking-widest px-8 py-3">
               Купить билеты
             </Button>
-            <Button variant="outline" className="border-white/20 text-white bg-transparent hover:bg-white/10 font-geist px-6 py-3">
-              Смотреть программу
+            <Button variant="outline" className="border-white/20 text-white bg-transparent hover:bg-white/10 font-ui text-xs tracking-widest px-6 py-3">
+              Программа
             </Button>
           </div>
 
-          <div className="flex gap-6 mt-6">
-            <a href="https://vk.com/okino.square" target="_blank" rel="noopener noreferrer"
-              className="font-geist text-white/40 hover:text-red-500 transition-colors text-xs tracking-wider flex items-center gap-1">
-              <Icon name="Users" size={14} /> vk.com/okino.square
-            </a>
-            <a href="https://t.me/okinosquare" target="_blank" rel="noopener noreferrer"
-              className="font-geist text-white/40 hover:text-red-500 transition-colors text-xs tracking-wider flex items-center gap-1">
-              <Icon name="Send" size={14} /> t.me/okinosquare
-            </a>
+          <div className="flex gap-5 mt-6">
+            {[
+              ["https://boosty.to/okino_official", "Heart", "Boosty"],
+              ["https://vk.com/okino.square", "Users", "VK"],
+              ["https://t.me/okinosquare", "Send", "Telegram"],
+              ["https://youtube.com/@okino.square", "Youtube", "YouTube"],
+            ].map(([href, icon, label]) => (
+              <a key={href} href={href} target="_blank" rel="noopener noreferrer"
+                className="font-ui text-white/30 hover:text-red-500 transition-colors text-[10px] tracking-widest flex items-center gap-1">
+                <Icon name={icon} size={12} /> {label}
+              </a>
+            ))}
           </div>
         </div>
 

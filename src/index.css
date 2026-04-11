@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -101,15 +101,34 @@
 }
 
 @layer components {
+  /* Шрифт для крупных заголовков (Место проведения, разделы) */
+  .font-heading {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* Шрифт для кнопок и UI-элементов */
+  .font-ui {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
   .font-orbitron {
-    font-family: "Bebas Neue", "Play", sans-serif;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
   }
 
+  /* Большие декоративные заголовки (КАРТА ГОРОДА) */
   .font-bebas {
-    font-family: "Bebas Neue", sans-serif;
-    letter-spacing: 0.02em;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
 
+  /* Основной текстовый шрифт — мягкий, с засечками */
   .font-geist {
     font-family: "Cormorant Garamond", "Inter", system-ui, serif;
     font-weight: 300;
@@ -121,7 +140,8 @@
   }
 
   .font-display {
-    font-family: "Bebas Neue", "Play", sans-serif;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
   }
 
   .city-map-bg {

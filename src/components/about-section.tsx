@@ -1,32 +1,54 @@
+import { CityMapBackground } from "@/components/city-map-background"
+
 export function AboutSection() {
   return (
-    <section id="about" className="py-20 px-4 bg-black city-map-bg">
-      <div className="max-w-5xl mx-auto">
+    <section id="about" className="py-20 px-4 bg-black relative overflow-hidden">
+      <CityMapBackground opacity={0.04} />
+      <div className="max-w-5xl mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="font-bebas text-red-500 text-sm tracking-[0.4em] mb-3">О ПРОЕКТЕ</p>
-            <h2 className="font-bebas text-5xl md:text-6xl text-white tracking-wide leading-tight mb-6">
-              ОКИНО —<br />это про кино<br />рядом с тобой
+            <p className="font-ui text-red-500 text-xs tracking-[0.4em] mb-4">О ПРОЕКТЕ</p>
+            <h2 className="font-heading text-5xl md:text-6xl text-white leading-tight mb-6">
+              ОКИНО
             </h2>
-            <p className="font-geist text-white/60 leading-relaxed mb-4">
-              ОКИНО — это пространство для любительского кино. Мы собираем авторов, которые снимают не ради денег, а ради историй. Наш фестиваль — место, где у каждого фильма есть шанс быть увиденным.
+            <p className="font-geist text-white/70 text-xl leading-relaxed mb-4">
+              Андеграундное АРТ-пространство для кино, искусства и творческих мероприятий от местных авторов.
             </p>
-            <p className="font-geist text-white/60 leading-relaxed">
-              Тема «Карта города» — это про маршруты, которые мы выбираем. Про места, которые нас формируют. Про людей, которых мы встречаем на этих улицах.
+            <p className="font-geist text-white/50 leading-relaxed mb-8">
+              Тема «Карта города» — про маршруты, которые мы выбираем. Про места, которые нас формируют. Про людей, которых мы встречаем на этих улицах.
             </p>
+            <div className="flex gap-4 flex-wrap">
+              {[
+                { href: "https://boosty.to/okino_official", label: "Boosty" },
+                { href: "https://vk.com/okino.square", label: "VK" },
+                { href: "https://youtube.com/@okino.square", label: "YouTube" },
+                { href: "https://t.me/okinosquare", label: "Telegram" },
+              ].map(({ href, label }) => (
+                <a
+                  key={href}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-ui text-xs text-white/40 hover:text-red-500 transition-colors tracking-widest border-b border-white/10 hover:border-red-500/40 pb-0.5"
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
           </div>
+
           <div className="flex flex-col gap-4">
             {[
               { label: "Участников", value: "—", sub: "авторов фильмов" },
               { label: "Короткометражек", value: "—", sub: "в конкурсной программе" },
               { label: "Дней фестиваля", value: "3", sub: "24, 25, 26 апреля" },
             ].map((stat, i) => (
-              <div key={i} className="border border-white/10 rounded-lg p-5 flex items-center gap-5 bg-zinc-950/50">
-                <div className="font-bebas text-4xl text-red-500 w-16 text-center">{stat.value}</div>
+              <div key={i} className="border border-white/8 rounded-lg p-5 flex items-center gap-5 bg-zinc-950/60">
+                <div className="font-heading text-4xl text-red-500 w-16 text-center">{stat.value}</div>
                 <div className="w-px h-10 bg-white/10" />
                 <div>
-                  <div className="font-bebas text-xl text-white tracking-wide">{stat.label}</div>
-                  <div className="font-geist text-white/40 text-xs">{stat.sub}</div>
+                  <div className="font-heading text-lg text-white">{stat.label}</div>
+                  <div className="font-geist text-white/40 text-sm">{stat.sub}</div>
                 </div>
               </div>
             ))}
