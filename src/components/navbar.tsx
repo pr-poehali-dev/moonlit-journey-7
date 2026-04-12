@@ -79,7 +79,7 @@ export function Navbar() {
             </a>
 
             {/* Корзина */}
-            <div className="relative ml-2">
+            <div className="relative">
               <button
                 onClick={() => setCartOpen(o => !o)}
                 className="relative text-white/70 hover:text-white transition-colors p-1"
