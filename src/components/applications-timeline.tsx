@@ -3,82 +3,275 @@ import Icon from "@/components/ui/icon"
 import { Button } from "@/components/ui/button"
 import { CityMapBackground } from "@/components/city-map-background"
 
-// Каждый день — два одинаковых показа: 14:00 и 18:00
-const sharedSessions = [
-  {
-    time: "14:00",
-    title: "Дневной показ",
-    desc: "Полная программа фестиваля — Блок 1 и Блок 2. Показ для тех, кто предпочитает дневное время.",
-    type: "screening",
-  },
-  {
-    time: "18:00",
-    title: "Вечерний показ",
-    desc: "Полная программа фестиваля — Блок 1 и Блок 2. Основной вечерний сеанс.",
-    type: "screening",
-  },
-  {
-    time: "после показа",
-    title: "Обсуждение",
-    desc: "Открытый разговор с авторами фильмов. Вопросы из зала.",
-    type: "talk",
-  },
-]
+interface Session {
+  time: string
+  title: string
+  desc: string
+  type: "opening" | "screening" | "talk" | "closing" | "special"
+}
 
-const days = [
+interface ShowBlock {
+  label: string
+  labelTime: string
+  color: "day" | "evening"
+  sessions: Session[]
+}
+
+interface Day {
+  date: string
+  weekday: string
+  shows: ShowBlock[]
+}
+
+const days: Day[] = [
   {
     date: "24 апреля",
     weekday: "Четверг",
-    sessions: [
-      { ...sharedSessions[0] },
-      { ...sharedSessions[1] },
-      { ...sharedSessions[2] },
+    shows: [
       {
-        time: "после",
-        title: "Открытие фестиваля",
-        desc: "Торжественное открытие. Слово организаторов. Небольшой праздник.",
-        type: "opening",
+        label: "Дневной показ",
+        labelTime: "14:00",
+        color: "day",
+        sessions: [
+          {
+            time: "до показа",
+            title: "Открытие фестиваля",
+            desc: "Торжественное открытие первого дня. Слово организаторов, небольшой фуршет и знакомство с программой.",
+            type: "opening",
+          },
+          {
+            time: "14:00",
+            title: "Дневной показ",
+            desc: "Полная программа фестиваля — Блок 1 и Блок 2. Показ для тех, кто предпочитает дневное время.",
+            type: "screening",
+          },
+          {
+            time: "после показа",
+            title: "Обсуждение",
+            desc: "Открытый разговор с авторами фильмов. Вопросы из зала, живое общение с командой.",
+            type: "talk",
+          },
+        ],
+      },
+      {
+        label: "Вечерний показ",
+        labelTime: "18:00",
+        color: "evening",
+        sessions: [
+          {
+            time: "до показа",
+            title: "Сбор гостей",
+            desc: "Встреча участников и гостей фестиваля. Небольшой фуршет перед вечерним сеансом.",
+            type: "special",
+          },
+          {
+            time: "18:00",
+            title: "Вечерний показ",
+            desc: "Полная программа фестиваля — Блок 1 и Блок 2. Основной вечерний сеанс.",
+            type: "screening",
+          },
+          {
+            time: "после показа",
+            title: "Обсуждение",
+            desc: "Открытый разговор с авторами фильмов. Вопросы из зала, живое общение с командой.",
+            type: "talk",
+          },
+        ],
       },
     ],
   },
   {
     date: "25 апреля",
     weekday: "Пятница",
-    sessions: [
-      { ...sharedSessions[0] },
-      { ...sharedSessions[1] },
-      { ...sharedSessions[2] },
+    shows: [
+      {
+        label: "Дневной показ",
+        labelTime: "14:00",
+        color: "day",
+        sessions: [
+          {
+            time: "до показа",
+            title: "Сбор гостей",
+            desc: "Встреча участников и гостей фестиваля.",
+            type: "special",
+          },
+          {
+            time: "14:00",
+            title: "Дневной показ",
+            desc: "Полная программа фестиваля — Блок 1 и Блок 2. Показ для тех, кто предпочитает дневное время.",
+            type: "screening",
+          },
+          {
+            time: "после показа",
+            title: "Обсуждение",
+            desc: "Открытый разговор с авторами фильмов. Вопросы из зала.",
+            type: "talk",
+          },
+        ],
+      },
+      {
+        label: "Вечерний показ",
+        labelTime: "18:00",
+        color: "evening",
+        sessions: [
+          {
+            time: "до показа",
+            title: "Сбор гостей",
+            desc: "Встреча участников и гостей фестиваля.",
+            type: "special",
+          },
+          {
+            time: "18:00",
+            title: "Вечерний показ",
+            desc: "Полная программа фестиваля — Блок 1 и Блок 2. Основной вечерний сеанс.",
+            type: "screening",
+          },
+          {
+            time: "после показа",
+            title: "Обсуждение",
+            desc: "Открытый разговор с авторами фильмов. Вопросы из зала.",
+            type: "talk",
+          },
+        ],
+      },
     ],
   },
   {
     date: "26 апреля",
     weekday: "Суббота",
-    sessions: [
-      { ...sharedSessions[0] },
-      { ...sharedSessions[1] },
-      { ...sharedSessions[2] },
+    shows: [
       {
-        time: "после",
-        title: "Церемония закрытия",
-        desc: "Финальное слово организаторов. Финальная вечеринка.",
-        type: "closing",
+        label: "Дневной показ",
+        labelTime: "14:00",
+        color: "day",
+        sessions: [
+          {
+            time: "до показа",
+            title: "Сбор гостей",
+            desc: "Встреча участников и гостей фестиваля.",
+            type: "special",
+          },
+          {
+            time: "14:00",
+            title: "Дневной показ",
+            desc: "Полная программа фестиваля — Блок 1 и Блок 2. Показ для тех, кто предпочитает дневное время.",
+            type: "screening",
+          },
+          {
+            time: "после показа",
+            title: "Обсуждение",
+            desc: "Открытый разговор с авторами фильмов. Вопросы из зала.",
+            type: "talk",
+          },
+        ],
+      },
+      {
+        label: "Вечерний показ",
+        labelTime: "18:00",
+        color: "evening",
+        sessions: [
+          {
+            time: "до показа",
+            title: "Сбор гостей",
+            desc: "Встреча участников и гостей фестиваля.",
+            type: "special",
+          },
+          {
+            time: "18:00",
+            title: "Вечерний показ",
+            desc: "Полная программа фестиваля — Блок 1 и Блок 2. Основной вечерний сеанс.",
+            type: "screening",
+          },
+          {
+            time: "после показа",
+            title: "Обсуждение",
+            desc: "Открытый разговор с авторами фильмов. Вопросы из зала.",
+            type: "talk",
+          },
+          {
+            time: "после",
+            title: "Церемония закрытия",
+            desc: "Объявление итогов фестиваля. Слово организаторов. Финальная вечеринка.",
+            type: "closing",
+          },
+        ],
       },
     ],
   },
 ]
 
 const typeColors: Record<string, string> = {
-  opening:   "border-red-500/40 bg-red-500/5",
+  opening: "border-red-500/40 bg-red-500/5",
   screening: "border-white/10 bg-white/3",
-  talk:      "border-red-500/20 bg-red-500/3",
-  closing:   "border-red-500/40 bg-red-500/5",
+  talk: "border-red-500/20 bg-red-500/3",
+  closing: "border-red-500/40 bg-red-500/5",
+  special: "border-white/8 bg-white/2",
 }
 
 const typeTextColors: Record<string, string> = {
-  opening:   "text-red-400",
+  opening: "text-red-400",
   screening: "text-white",
-  talk:      "text-red-300",
-  closing:   "text-red-400",
+  talk: "text-red-300",
+  closing: "text-red-400",
+  special: "text-white/60",
+}
+
+function ShowAccordion({ show }: { show: ShowBlock }) {
+  const [open, setOpen] = useState(false)
+
+  const isDay = show.color === "day"
+
+  return (
+    <div className={`rounded-lg border overflow-hidden ${isDay ? "border-white/15" : "border-red-500/20"}`}>
+      {/* Заголовок-кнопка */}
+      <button
+        onClick={() => setOpen(!open)}
+        className={`w-full flex items-center justify-between px-4 py-3 transition-colors ${
+          isDay ? "bg-white/4 hover:bg-white/8" : "bg-red-500/6 hover:bg-red-500/10"
+        }`}
+      >
+        <div className="flex items-center gap-3">
+          <span className={`font-space-mono text-lg font-bold ${isDay ? "text-white/80" : "text-red-400"}`}>
+            {show.labelTime}
+          </span>
+          <div className="w-px h-5 bg-white/15" />
+          <span className="font-heading text-base text-white">{show.label}</span>
+        </div>
+        <Icon
+          name={open ? "ChevronUp" : "ChevronDown"}
+          size={16}
+          className={`transition-colors flex-shrink-0 ${open ? (isDay ? "text-white/60" : "text-red-400") : "text-white/25"}`}
+        />
+      </button>
+
+      {/* Содержимое */}
+      {open && (
+        <div className="px-3 pb-3 pt-2 space-y-2 border-t border-white/6">
+          {show.sessions.map((session, i) => (
+            <div
+              key={i}
+              className={`flex gap-3 p-3 rounded-lg border ${typeColors[session.type]}`}
+            >
+              <div className="flex-shrink-0 w-20 text-center">
+                <span className={`font-space-mono text-xs font-bold leading-tight ${typeTextColors[session.type]}`}>
+                  {session.time}
+                </span>
+              </div>
+              <div className="w-px bg-red-500/15 flex-shrink-0" />
+              <div>
+                <h4 className={`font-heading text-sm ${typeTextColors[session.type]}`}>
+                  {session.title}
+                </h4>
+                <p className="font-geist text-white/40 text-xs mt-0.5 leading-relaxed">
+                  {session.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }
 
 export function ApplicationsTimeline() {
@@ -90,11 +283,10 @@ export function ApplicationsTimeline() {
       <div className="max-w-4xl mx-auto relative z-10">
         <div className="text-center mb-10">
           <h2 className="font-heading text-4xl md:text-6xl text-white">Расписание показов</h2>
-          {/* Важная подсказка про два показа */}
           <div className="mt-4 inline-flex items-start gap-2 bg-red-500/8 border border-red-500/20 rounded-lg px-4 py-3 max-w-lg mx-auto">
             <Icon name="Info" size={14} className="text-red-400 flex-shrink-0 mt-0.5" />
             <p className="font-geist text-white/60 text-sm text-left leading-relaxed">
-              Каждый день — <span className="text-white">два показа</span>: в <span className="text-red-400">14:00</span> и в <span className="text-red-400">18:00</span>. Выберите удобное время. Места ограничены — берите билеты заранее.
+              Каждый день — <span className="text-white font-semibold">два показа</span>: в <span className="text-red-400 font-semibold">14:00</span> и в <span className="text-red-400 font-semibold">18:00</span>. Нажмите на показ, чтобы увидеть программу.
             </p>
           </div>
         </div>
@@ -118,28 +310,10 @@ export function ApplicationsTimeline() {
           ))}
         </div>
 
-        {/* Сессии */}
+        {/* Показы */}
         <div className="space-y-3">
-          {days[activeDay].sessions.map((session, i) => (
-            <div
-              key={i}
-              className={`flex gap-4 p-4 md:p-5 rounded-lg border transition-all duration-300 ${typeColors[session.type]}`}
-            >
-              <div className="flex-shrink-0 w-20 text-center">
-                <span className={`font-space-mono text-base font-bold ${typeTextColors[session.type]}`}>
-                  {session.time}
-                </span>
-              </div>
-              <div className="w-px bg-red-500/15 flex-shrink-0" />
-              <div>
-                <h3 className={`font-heading text-lg ${typeTextColors[session.type]}`}>
-                  {session.title}
-                </h3>
-                <p className="font-geist text-white/45 text-sm mt-1 leading-relaxed">
-                  {session.desc}
-                </p>
-              </div>
-            </div>
+          {days[activeDay].shows.map((show, i) => (
+            <ShowAccordion key={i} show={show} />
           ))}
         </div>
 

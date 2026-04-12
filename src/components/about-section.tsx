@@ -17,11 +17,11 @@ export function AboutSection() {
             <p className="font-geist text-white leading-relaxed mb-4 border-b border-white/25 pb-4">
               <span className="font-semibold">«Карта Города»</span> — это сборник из короткометражных фильмов, в котором каждый автор строит свою историю вокруг определённой локации. Это попытка почувствовать город через отдельные места, состояния и истории — через локации, которые становятся не просто фоном, а частью самого высказывания.
             </p>
-            <p className="font-geist text-white/50 leading-relaxed mb-4">
+            <p className="font-geist text-white/60 leading-relaxed mb-4 font-semibold">
               Обратите внимание на расписание: в дни фестиваля один и тот же сборник будет показан дважды — в 14:00 и в 18:00. Вы можете выбрать удобное для себя время!
             </p>
             <div className="inline-block border border-red-500/40 rounded px-4 py-2 mb-8">
-              <p className="font-geist text-white/70 text-sm">
+              <p className="font-geist text-white/80 text-sm font-bold">
                 Советуем взять билеты заранее — места ограничены!
               </p>
             </div>
