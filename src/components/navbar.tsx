@@ -62,20 +62,20 @@ export function Navbar() {
           {/* Right side */}
           <div className="hidden md:flex items-center gap-3 flex-shrink-0 ml-auto">
             <a href="https://boosty.to/okino_official" target="_blank" rel="noopener noreferrer"
-              className="text-white/40 hover:text-white transition-colors" title="Boosty">
-              <Icon name="Heart" size={16} />
+              className="text-white/70 hover:text-white transition-colors" title="Boosty">
+              <Icon name="Heart" size={18} />
             </a>
             <a href="https://vk.com/okino.square" target="_blank" rel="noopener noreferrer"
-              className="text-white/40 hover:text-white transition-colors" title="VK">
-              <Icon name="Users" size={16} />
+              className="text-white/70 hover:text-white transition-colors" title="VK">
+              <Icon name="Users" size={18} />
             </a>
             <a href="https://t.me/okinosquare" target="_blank" rel="noopener noreferrer"
-              className="text-white/40 hover:text-white transition-colors" title="Telegram">
-              <Icon name="Send" size={16} />
+              className="text-white/70 hover:text-white transition-colors" title="Telegram">
+              <Icon name="Send" size={18} />
             </a>
             <a href="https://youtube.com/@okino.square" target="_blank" rel="noopener noreferrer"
-              className="text-white/40 hover:text-white transition-colors" title="YouTube">
-              <Icon name="Youtube" size={16} />
+              className="text-white/70 hover:text-white transition-colors" title="YouTube">
+              <Icon name="Youtube" size={18} />
             </a>
 
             {/* Корзина */}
