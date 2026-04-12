@@ -1,6 +1,5 @@
 import { useState } from "react"
 import Icon from "@/components/ui/icon"
-import { Badge } from "@/components/ui/badge"
 import { CityMapBackground } from "@/components/city-map-background"
 
 interface Film {
@@ -20,24 +19,23 @@ interface Film {
 const films: Film[] = [
   // БЛОК 1
   { id: 4,  title: "Три товарища",    author: "Ксения Ремарк",        synopsis: "В уютной библиотеке трое давних друзей собираются вместе, погруженные в атмосферу уюта и спокойствия. В их образах — женщины в мужских ролях — делятся своими мыслями о женщинах, о чувствах и жизни. В этот тихий вечер разговоры ведутся откровенно, но один из них скрывает тайну, которая остаётся за кадром до самого конца.",  duration: "12:26", location: "Библиотека",           block: 1, x: 8,  y: 31, image: "https://cdn.poehali.dev/projects/59266136-7b6c-414f-a200-d1fd1000076c/bucket/1fb63b86-b3f0-469e-8433-7c373957db27.jpg" },
-  { id: 5,  title: "Мост",            author: "Артур Садриев",         synopsis: "Камерная драматическая история о случайной ночной встрече на пустынном мосту. Один разговор между двумя незнакомыми людьми постепенно раскрывает их внутреннюю боль, одиночество и хрупкое стремление продолжать жить. Это фильм о человеческой близости, эмпатии и надежде, которая может появиться даже в самый тёмный момент.",  duration: "2:52",  location: "Мост",                 block: 1, x: 29, y: 17 },
+  { id: 5,  title: "Мост",            author: "Артур Садриев",         synopsis: "Камерная драматическая история о случайной ночной встрече на пустынном мосту. Один разговор между двумя незнакомыми людьми постепенно раскрывает их внутреннюю боль, одиночество и хрупкое стремление продолжать жить. Это фильм о человеческой близости, эмпатии и надежде, которая может появиться даже в самый тёмный момент.",  duration: "2:52",  location: "Мост",                 block: 1, x: 29, y: 17, image: "https://cdn.poehali.dev/projects/59266136-7b6c-414f-a200-d1fd1000076c/bucket/460e6d73-50c7-4eeb-b1f3-936f1c6d3eff.PNG" },
   { id: 9,  title: "С любовью, Борис",author: "Виталий Красильников",  synopsis: "«Не читал, но осуждаю» — последствия травли великого поэта Пастернака Бориса в вольной интерпретации Красильникова Виталия.",  duration: "15:07", location: "Деревенский домик",    block: 1, x: 14, y: 72, image: "https://cdn.poehali.dev/projects/59266136-7b6c-414f-a200-d1fd1000076c/bucket/54059d7c-fafa-47ee-8dd3-8765b74e075d.jpg" },
   { id: 15, title: "ПВЗ",             author: "Артур Камалов",         synopsis: "Мрачная фантастическая драма о нарастающем безумии вокруг рядового оператора нишевого пункта выдачи заказов на фоне мирового кризиса.",  duration: "9:45",  location: "ПВЗ",                  block: 1, x: 41, y: 55, image: "https://cdn.poehali.dev/projects/59266136-7b6c-414f-a200-d1fd1000076c/bucket/e6c9541f-6aa5-43d0-ac5f-02ac92322fd1.png" },
-  { id: 20, title: "Остановка",       author: "Андрей Петров",         synopsis: "Этот фильм не о любви, как можно подумать, только посмотрев его. Он о том, что в жизни каждое событие, даже мимолётное, имеет определённый смысл и делает нас такими, какие мы есть.",  duration: "11:54", location: "Остановка",            block: 1, x: 22, y: 47 },
+  { id: 20, title: "Остановка",       author: "Андрей Петров",         synopsis: "Этот фильм не о любви, как можно подумать, только посмотрев его. Он о том, что в жизни каждое событие, даже мимолётное, имеет определённый смысл и делает нас такими, какие мы есть.",  duration: "11:54", location: "Остановка",            block: 1, x: 22, y: 47, image: "https://cdn.poehali.dev/projects/59266136-7b6c-414f-a200-d1fd1000076c/bucket/eea9042f-070b-49d0-b9c1-81f0d476d696.png" },
   { id: 21, title: "Plato",           author: "Темур Сангинов",        synopsis: "Экспериментальный фильм, приглашающий зрителя поучаствовать в интерпретации истории о расставании, принятии и столкновении с очередной непреодолимой стеной. Так ли это на самом деле?",  duration: "6:13",  location: "Роллердром/скейтпарк", block: 1, x: 36, y: 83, image: "https://cdn.poehali.dev/projects/59266136-7b6c-414f-a200-d1fd1000076c/bucket/b08e8704-7ec1-4642-aa20-dfedb70e9d1c.jpg" },
-  { id: 23, title: "Мужество",        author: "Денис Файзулин",        synopsis: "Двое молодых людей сталкиваются в подземном переходе. Никто из них не выходит из подземки прежним.",  duration: "3:38",  location: "Подземный переход",    block: 1, x: 44, y: 28 },
+  { id: 23, title: "Мужество",        author: "Денис Файзулин",        synopsis: "Двое молодых людей сталкиваются в подземном переходе. Никто из них не выходит из подземки прежним.",  duration: "3:38",  location: "Подземный переход",    block: 1, x: 44, y: 28, image: "https://cdn.poehali.dev/projects/59266136-7b6c-414f-a200-d1fd1000076c/bucket/f6b72159-c479-4780-a10c-5de961551d0e.png" },
   // БЛОК 2
   { id: 2,  title: "Кисть",           author: "Екатерина Кузнецова",   synopsis: "Один шедевр. Один покупатель. И одна грандиозная ловушка. Коллекционер-циник годами продаёт «пустые» картины богатым простакам. Но когда анонимный художник под псевдонимом «Мастер» приглашает его в провинциальный город за «уникальным артефактом» — правила игры начинают меняться. Он всё ещё мастер блефа или главный экспонат в чужой игре абсурда?",  duration: "—",     location: "Автовокзал",           block: 2, x: 55, y: 19 },
   { id: 3,  title: "Форма жизни",     author: "Айрат Башаров",         synopsis: "У юной девушки есть мечта: купить себе музыкальный инструмент своими силами. Но один курьёзный случай мешает её планам. Как она справится с этим — или ей кто-то поможет?",  duration: "—",     location: "Банк / банкомат",      block: 2, x: 77, y: 36 },
   { id: 10, title: "Между стенами",   author: "Алексей Мурыгин",       synopsis: "Случайная перепалка двух девушек в общежитии становится началом странного и неожиданного диалога. История о столкновении характеров и хрупком контакте между людьми.",  duration: "—",     location: "Туалет",               block: 2, x: 63, y: 74 },
-  { id: 13, title: "Побочный эффект", author: "Алиса Чинская",         synopsis: "После происшествия на ночной дороге герой пытается сохранить контроль над ситуацией… Но напряжение сильнее, чем он способен выдержать.",  duration: "—",     location: "СТО / Автомойка / АЗС",block: 2, x: 88, y: 61 },
+  { id: 13, title: "Побочный эффект", author: "Алиса Чинская",         synopsis: "После происшествия на ночной дороге герой пытается сохранить контроль над ситуацией… Но напряжение сильнее, чем он способен выдержать.",  duration: "—",     location: "СТО / Автомойка / АЗС",block: 2, x: 88, y: 61, image: "https://cdn.poehali.dev/projects/59266136-7b6c-414f-a200-d1fd1000076c/bucket/148c1646-ba9a-4b4c-9e82-f8834be12f02.jpg" },
   { id: 14, title: "Кошмар",          author: "Михаил Чепкасов",       synopsis: "Мария приходит в себя ночью на пустой заснеженной парковке рядом с сигналящей машиной. Пытаясь выбраться, она обнаруживает, что попала в место, живущее по своим правилам: пространство меняется, пути замыкаются, а каждое решение ведёт всё глубже в ловушку. Здесь что-то знает о ней больше, чем должно.",  duration: "—",     location: "Парковка",             block: 2, x: 71, y: 50, image: "https://cdn.poehali.dev/projects/59266136-7b6c-414f-a200-d1fd1000076c/bucket/f2468985-71f8-4f91-bcf9-bbb2fff4e737.jpg" },
-  { id: 19, title: "Два пути",        author: "Артур Мифтахов",        synopsis: "Два друга детства встречаются спустя годы: один, устав от уличной жизни, пришёл в офис и пытается построить карьеру, а второй так и остался жить по законам улицы. За короткой встречей они пытаются понять, кто из них на самом деле сделал правильный выбор.",  duration: "—",     location: "Офис",                 block: 2, x: 59, y: 43 },
+  { id: 19, title: "Два пути",        author: "Артур Мифтахов",        synopsis: "Два друга детства встречаются спустя годы: один, устав от уличной жизни, пришёл в офис и пытается построить карьеру, а второй так и остался жить по законам улицы. За короткой встречей они пытаются понять, кто из них на самом деле сделал правильный выбор.",  duration: "—",     location: "Офис",                 block: 2, x: 59, y: 43, image: "https://cdn.poehali.dev/projects/59266136-7b6c-414f-a200-d1fd1000076c/bucket/db1134b5-4f9d-484b-8caa-f61a2f2ddbea.jpg" },
   { id: 27, title: "8 кухонных метров",author: "Дмитрий Сарычев",      synopsis: "Уставший после работы музыкант возвращается в свою маленькую съёмную квартиру. Что может прийти ему в голову в тишине старой кухни? Планы на завтра? Как пережить кризис среднего возраста? Или всё-таки новая песня?",  duration: "—",     location: "Кухня",                block: 2, x: 82, y: 82 },
 ]
 
 function MapPin({ film, isActive, onClick }: { film: Film; isActive: boolean; onClick: () => void }) {
-  const color = film.block === 1 ? "#dc2626" : "#b91c1c"
   return (
     <button
       onClick={onClick}
@@ -48,7 +46,7 @@ function MapPin({ film, isActive, onClick }: { film: Film; isActive: boolean; on
         <div className={`transition-all duration-300 ${isActive ? "scale-130" : "scale-100 group-hover:scale-115"}`}>
           <svg viewBox="0 0 40 56" className="w-7 h-9 md:w-9 md:h-12 drop-shadow-xl" fill="none">
             <path d="M20 2C10.6 2 3 9.6 3 19c0 11.7 17 35 17 35s17-23.3 17-35C37 9.6 29.4 2 20 2z"
-              fill={isActive ? "#ef4444" : color} />
+              fill={isActive ? "#ef4444" : "#dc2626"} />
             <circle cx="20" cy="19" r="8" fill="#000" opacity="0.35" />
             <circle cx="20" cy="19" r="4" fill={isActive ? "#fff" : "#fca5a5"} opacity="0.7" />
           </svg>
@@ -72,12 +70,7 @@ function FilmCard({ film, onClose }: { film: Film; onClose: () => void }) {
       <div className="bg-zinc-900/95 border border-red-500/30 rounded-lg p-4 shadow-2xl backdrop-blur">
         <div className="flex items-start justify-between mb-3">
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
-              <Badge className={`text-white text-[10px] font-ui border-0 ${film.block === 1 ? "bg-red-600" : "bg-red-800"}`}>
-                Блок {film.block}
-              </Badge>
-              <span className="font-geist text-white/30 text-xs">#{film.id}</span>
-            </div>
+
             <h3 className="font-heading text-xl text-white leading-tight">
               {hasTitle ? `«${film.title}»` : <span className="text-white/30 italic text-base">Название уточняется</span>}
             </h3>
@@ -111,11 +104,7 @@ function FilmCard({ film, onClose }: { film: Film; onClose: () => void }) {
           {film.synopsis}
         </p>
 
-        <div className="mt-3 pt-3 border-t border-white/8 flex items-center justify-end">
-          <span className={`font-ui text-[9px] tracking-wider ${film.block === 1 ? "text-red-500/60" : "text-red-700/60"}`}>
-            БЛОК {film.block}
-          </span>
-        </div>
+
       </div>
     </div>
   )
@@ -123,13 +112,11 @@ function FilmCard({ film, onClose }: { film: Film; onClose: () => void }) {
 
 export function FeaturesSection() {
   const [activeFilm, setActiveFilm] = useState<Film | null>(null)
-  const [activeBlock, setActiveBlock] = useState<0 | 1 | 2>(0)
-
   const handlePin = (film: Film) => {
     setActiveFilm(prev => prev?.id === film.id ? null : film)
   }
 
-  const visibleFilms = activeBlock === 0 ? films : films.filter(f => f.block === activeBlock)
+  const visibleFilms = films
 
   return (
     <section id="films" className="py-20 px-4 bg-black relative overflow-hidden">
@@ -145,21 +132,11 @@ export function FeaturesSection() {
           </p>
         </div>
 
-        {/* Фильтр по блокам */}
+        {/* Фильтр */}
         <div className="flex gap-2 justify-center mb-6">
-          {([["Все фильмы", 0], ["Блок 1", 1], ["Блок 2", 2]] as [string, 0|1|2][]).map(([label, val]) => (
-            <button
-              key={val}
-              onClick={() => { setActiveBlock(val); setActiveFilm(null) }}
-              className={`font-ui text-xs px-4 py-2 rounded border transition-all tracking-widest ${
-                activeBlock === val
-                  ? "bg-red-600 border-red-600 text-white"
-                  : "border-white/15 text-white/40 hover:border-red-500/40 hover:text-white/70"
-              }`}
-            >
-              {label}
-            </button>
-          ))}
+          <button className="font-ui text-xs px-4 py-2 rounded border transition-all tracking-widest bg-red-600 border-red-600 text-white">
+            Все фильмы
+          </button>
         </div>
 
         {/* Карта */}
@@ -191,13 +168,6 @@ export function FeaturesSection() {
             <path d="M80  300 Q130 280 170 250 Q185 225 200 215" stroke="white" strokeWidth="0.4" fill="none" opacity="0.6" />
             <path d="M320 300 Q270 280 230 250 Q215 225 200 215" stroke="white" strokeWidth="0.4" fill="none" opacity="0.6" />
           </svg>
-
-          {/* Разделитель блоков */}
-          <div className="absolute inset-y-0 left-1/2 w-px bg-red-500/15" style={{ borderLeft: "1px dashed rgba(239,68,68,0.2)" }} />
-
-          {/* Подписи блоков */}
-          <div className="absolute top-3 left-[25%] -translate-x-1/2 font-ui text-[9px] text-red-500/50 tracking-widest">БЛОК 1</div>
-          <div className="absolute top-3 left-[75%] -translate-x-1/2 font-ui text-[9px] text-red-700/50 tracking-widest">БЛОК 2</div>
 
           {/* Пины */}
           {visibleFilms.map((film) => (
