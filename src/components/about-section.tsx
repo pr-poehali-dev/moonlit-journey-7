@@ -11,7 +11,7 @@ export function AboutSection() {
             <h2 className="font-heading text-5xl md:text-6xl text-white leading-tight mb-6">
               ОКИНО
             </h2>
-            <p className="font-geist text-white text-xl leading-relaxed mb-4 font-semibold">
+            <p className="font-geist text-red-400 text-xl leading-relaxed mb-4 font-semibold">
               Андеграундное АРТ-пространство для кино, искусства и творческих мероприятий от местных авторов.
             </p>
             <p className="font-geist text-white leading-relaxed mb-4 border-b border-white/25 pb-4">
