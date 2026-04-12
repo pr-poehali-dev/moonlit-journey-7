@@ -244,9 +244,7 @@ export function Hero3DWebGL() {
                 Купить билет
               </Button>
             </a>
-            <Button variant="outline" className="border-white/20 text-white bg-transparent hover:bg-white/10 font-ui text-xs tracking-widest px-6 py-3">
-              Программа
-            </Button>
+
           </div>
 
           <div className="flex gap-5 mt-6">
