@@ -20,7 +20,7 @@ export function AboutSection() {
             <p className="font-geist text-red-400 leading-relaxed mb-4 font-semibold">
               Обратите внимание на расписание: в дни фестиваля один и тот же сборник будет показан дважды — в 14:00 и в 18:00. Вы можете выбрать удобное для себя время!
             </p>
-            <div className="inline-block border border-red-500/40 rounded px-4 py-2 mb-8">
+            <div className="inline-block border border-red-400 rounded px-4 py-2 mb-8">
               <p className="font-geist text-white/80 text-sm font-bold">
                 Советуем взять билеты заранее — места ограничены!
               </p>
