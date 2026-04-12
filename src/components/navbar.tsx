@@ -34,11 +34,7 @@ export function Navbar() {
               <a
                 key={href}
                 href={href}
-                className={`font-ui text-xs transition-colors duration-200 ${
-                  label === "ОКИНО"
-                    ? "text-red-500 hover:text-red-400"
-                    : "text-white/60 hover:text-white"
-                }`}
+                className="font-ui text-xs transition-colors duration-200 text-white/60 hover:text-white"
               >
                 {label}
               </a>
@@ -84,9 +80,7 @@ export function Navbar() {
                 <a
                   key={href}
                   href={href}
-                  className={`block px-3 py-2 font-ui text-xs tracking-widest transition-colors ${
-                    label === "ОКИНО" ? "text-red-500" : "text-white/60 hover:text-white"
-                  }`}
+                  className="block px-3 py-2 font-ui text-xs tracking-widest transition-colors text-white/60 hover:text-white"
                   onClick={() => setIsOpen(false)}
                 >
                   {label}
