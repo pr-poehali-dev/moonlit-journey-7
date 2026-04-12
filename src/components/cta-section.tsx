@@ -21,10 +21,12 @@ export function CTASection() {
           Приходи смотреть кино, снятое такими же людьми как ты. Любительское — значит настоящее.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Button className="bg-white text-red-600 hover:bg-white/90 font-ui text-xs px-8 py-3 border-0 tracking-widest">
-            <Icon name="Ticket" size={16} className="mr-2" />
-            Купить билеты
-          </Button>
+          <a href="https://okino-event.timepad.ru/event/3922667/" target="_blank" rel="noopener noreferrer">
+            <Button className="bg-white text-red-600 hover:bg-white/90 font-ui text-xs px-8 py-3 border-0 tracking-widest">
+              <Icon name="Ticket" size={16} className="mr-2" />
+              Купить билет
+            </Button>
+          </a>
           <a href="https://boosty.to/okino_official" target="_blank" rel="noopener noreferrer">
             <Button variant="outline" className="border-white/60 text-white bg-transparent hover:bg-white/10 font-ui text-xs px-6 py-3 tracking-widest w-full sm:w-auto">
               <Icon name="Heart" size={15} className="mr-2" />
