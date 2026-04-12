@@ -191,32 +191,24 @@ export function FeaturesSection() {
         </div>
 
         {/* Список фильмов под картой */}
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-3">
-          {[1, 2].map(block => (
-            <div key={block}>
-              <p className="font-ui text-red-500/70 text-[10px] tracking-[0.4em] mb-3">БЛОК {block}</p>
-              <div className="space-y-1.5">
-                {films.filter(f => f.block === block).map(f => (
-                  <button
-                    key={f.id}
-                    onClick={() => { setActiveBlock(0); setActiveFilm(f) }}
-                    className="w-full flex items-center gap-3 px-3 py-2 rounded border border-white/8 bg-zinc-950/60 hover:border-red-500/30 hover:bg-zinc-900/60 transition-all text-left group"
-                  >
-                    <span className="font-ui text-white/20 text-[10px] w-4 flex-shrink-0">#{f.id}</span>
-                    <div className="flex-1 min-w-0">
-                      <span className="font-geist text-white/80 text-sm group-hover:text-white transition-colors">
-                        {f.title !== "—" ? `«${f.title}»` : <span className="text-white/25 italic text-xs">название уточняется</span>}
-                      </span>
-                      <span className="font-geist text-white/30 text-xs block">{f.author} · {f.location}</span>
-                    </div>
-                    {f.duration !== "—" && (
-                      <span className="font-space-mono text-white/30 text-[10px] flex-shrink-0">{f.duration}</span>
-                    )}
-                    <Icon name="MapPin" size={12} className="text-red-500/40 flex-shrink-0" />
-                  </button>
-                ))}
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-1.5">
+          {films.map(f => (
+            <button
+              key={f.id}
+              onClick={() => setActiveFilm(f)}
+              className="w-full flex items-center gap-3 px-3 py-2 rounded border border-white/8 bg-zinc-950/60 hover:border-red-500/30 hover:bg-zinc-900/60 transition-all text-left group"
+            >
+              <div className="flex-1 min-w-0">
+                <span className="font-geist text-white/80 text-sm group-hover:text-white transition-colors">
+                  {f.title !== "—" ? `«${f.title}»` : <span className="text-white/25 italic text-xs">название уточняется</span>}
+                </span>
+                <span className="font-geist text-white/30 text-xs block">{f.author} · {f.location}</span>
               </div>
-            </div>
+              {f.duration !== "—" && (
+                <span className="font-space-mono text-white/30 text-[10px] flex-shrink-0">{f.duration}</span>
+              )}
+              <Icon name="MapPin" size={12} className="text-red-500/40 flex-shrink-0" />
+            </button>
           ))}
         </div>
 
