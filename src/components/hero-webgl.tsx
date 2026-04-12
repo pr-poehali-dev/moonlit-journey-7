@@ -239,9 +239,11 @@ export function Hero3DWebGL() {
           </div>
 
           <div className="flex gap-3 mt-8">
-            <Button className="bg-red-600 hover:bg-red-700 text-white font-ui border-0 text-xs tracking-widest px-8 py-3">
-              Купить билеты
-            </Button>
+            <a href="https://okino-event.timepad.ru/event/3922667/" target="_blank" rel="noopener noreferrer">
+              <Button className="bg-red-600 hover:bg-red-700 text-white font-ui border-0 text-xs tracking-widest px-8 py-3">
+                Купить билет
+              </Button>
+            </a>
             <Button variant="outline" className="border-white/20 text-white bg-transparent hover:bg-white/10 font-ui text-xs tracking-widest px-6 py-3">
               Программа
             </Button>
