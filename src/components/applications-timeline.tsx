@@ -230,7 +230,7 @@ function ShowAccordion({ show }: { show: ShowBlock }) {
   const isDay = show.color === "day"
 
   return (
-    <div className={`rounded-lg border overflow-hidden ${isDay ? "border-white/15" : "border-red-500/20"}`}>
+    <div className="rounded-lg border overflow-hidden border-red-500/20">
       {/* Заголовок-кнопка */}
       <button
         onClick={() => setOpen(!open)}
