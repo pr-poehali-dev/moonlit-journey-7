@@ -48,8 +48,8 @@ export function AboutSection() {
           <div className="flex flex-col gap-4">
             {[
               { label: "Авторов", value: "14", sub: "участников фестиваля" },
-              { label: "Фильмов", value: "14", sub: "в двух блоках программы" },
               { label: "Дней показов", value: "3", sub: "24, 25, 26 апреля" },
+              { label: "Фильмов", value: "14", sub: "в двух блоках программы" },
             ].map((stat, i) => (
               <div key={i} className="border border-white/8 rounded-lg p-5 flex items-center gap-5 bg-zinc-950/60">
                 <div className="font-heading text-4xl text-red-500 w-16 text-center">{stat.value}</div>
