@@ -34,7 +34,7 @@ export function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-[9999] bg-black/95 backdrop-blur-md border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center h-16">
 
           {/* Логотип */}
           <a href="#" className="flex-shrink-0 group">
@@ -47,7 +47,7 @@ export function Navbar() {
           </a>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-6 ml-8">
+          <div className="hidden md:flex items-center gap-6 flex-1 justify-center">
             {navLinks.map(([href, label]) => (
               <a
                 key={href}
@@ -60,7 +60,7 @@ export function Navbar() {
           </div>
 
           {/* Right side */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-3 flex-shrink-0 ml-auto">
             <a href="https://boosty.to/okino_official" target="_blank" rel="noopener noreferrer"
               className="text-white/40 hover:text-white transition-colors" title="Boosty">
               <Icon name="Heart" size={16} />
