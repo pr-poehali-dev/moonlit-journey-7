@@ -16,7 +16,7 @@ export function SafetySection() {
               <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[22px] border-l-red-500 ml-1" />
             </div>
             <p className="font-bebas text-2xl text-white/30 tracking-wide">Трейлер скоро появится</p>
-            <p className="font-geist text-white/20 text-xs mt-2">Вставьте ссылку на YouTube или загрузите видео</p>
+
           </div>
           <div className="absolute inset-0 pointer-events-none"
             style={{
@@ -25,9 +25,7 @@ export function SafetySection() {
             }} />
         </div>
 
-        <p className="font-geist text-white/25 text-xs text-center mt-4">
-          * Для добавления трейлера вставьте ссылку на YouTube-видео
-        </p>
+
       </div>
     </section>
   )

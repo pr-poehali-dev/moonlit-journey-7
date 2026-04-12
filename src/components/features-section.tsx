@@ -212,9 +212,7 @@ export function FeaturesSection() {
           ))}
         </div>
 
-        <p className="text-center font-geist text-white/20 text-xs mt-5">
-          * Синопсисы и кадры из фильмов будут добавлены позднее
-        </p>
+
       </div>
     </section>
   )
