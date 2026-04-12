@@ -50,11 +50,7 @@ export function CTASection() {
             </Button>
           </a>
         </div>
-        <p className="font-ui text-white font-bold text-base mt-8 tracking-widest uppercase">
-          <span className="text-white/60">18+</span>
-          <span className="mx-2 text-white/40">·</span>
-          <span className="border-b-2 border-white pb-0.5">Вход только по билетам</span>
-        </p>
+        <p className="font-ui text-white/70 text-xs mt-8 tracking-widest">18+ · ФЕСТИВАЛЬ КОРОТКОМЕТРАЖНОГО КИНО</p>
       </div>
     </section>
   )

@@ -231,7 +231,7 @@ function ShowAccordion({ show }: { show: ShowBlock }) {
         }`}
       >
         <div className="flex items-center gap-3">
-          <span className={`font-space-mono text-lg font-bold ${isDay ? "text-white/80" : "text-red-400"}`}>
+          <span className="font-space-mono text-lg font-bold text-red-500">
             {show.labelTime}
           </span>
           <div className="w-px h-5 bg-white/15" />
@@ -285,8 +285,8 @@ export function ApplicationsTimeline() {
           <h2 className="font-heading text-4xl md:text-6xl text-white">Расписание показов</h2>
           <div className="mt-4 inline-flex items-start gap-2 bg-red-500/8 border border-red-500/20 rounded-lg px-4 py-3 max-w-lg mx-auto">
             <Icon name="Info" size={14} className="text-red-400 flex-shrink-0 mt-0.5" />
-            <p className="font-geist text-white/60 text-sm text-left leading-relaxed">
-              Каждый день — <span className="text-white font-semibold">два показа</span>: в <span className="text-red-400 font-semibold">14:00</span> и в <span className="text-red-400 font-semibold">18:00</span>. Нажмите на показ, чтобы увидеть программу.
+            <p className="font-geist text-white/70 text-sm text-left leading-relaxed font-semibold">
+              Каждый день — <span className="text-white">два показа</span>: в <span className="text-red-400">14:00</span> и в <span className="text-red-400">18:00</span>. Нажмите на показ, чтобы увидеть программу.
             </p>
           </div>
         </div>

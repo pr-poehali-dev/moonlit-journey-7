@@ -8,7 +8,7 @@ export function TestimonialsSection() {
           <p className="font-geist text-white font-semibold text-base md:text-lg mt-3">
             ГЭС 9/02 · Проспект Мусы Джалиля 51
           </p>
-          <p className="font-geist text-white/60 text-sm mt-1">Этаж 4 · 420 кабинет · Набережные Челны</p>
+          <p className="font-geist text-white font-bold text-sm md:text-base mt-1">Этаж 4 · 420 кабинет · Набережные Челны</p>
         </div>
 
         <div className="rounded-lg overflow-hidden border border-white/10" style={{ height: "400px" }}>

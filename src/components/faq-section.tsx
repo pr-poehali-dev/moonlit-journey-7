@@ -29,7 +29,7 @@ export function FAQSection() {
                 onClick={() => setOpen(open === i ? null : i)}
                 className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-white/5 transition-colors"
               >
-                <span className="font-geist text-white font-medium text-sm pr-4">{item.q}</span>
+                <span className="font-geist text-white font-bold text-base pr-4">{item.q}</span>
                 <Icon
                   name={open === i ? "ChevronUp" : "ChevronDown"}
                   size={18}

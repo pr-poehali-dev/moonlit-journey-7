@@ -15,25 +15,15 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center md:items-end gap-2">
-            <div className="flex gap-5 flex-wrap justify-center md:justify-end">
-              {[
-                ["https://boosty.to/okino_official", "Boosty"],
-                ["https://vk.com/okino.square", "vk.com/okino.square"],
-                ["https://t.me/okinosquare", "t.me/okinosquare"],
-                ["https://youtube.com/@okino.square", "YouTube"],
-              ].map(([href, label]) => (
-                <a key={href} href={href} target="_blank" rel="noopener noreferrer"
-                  className="font-ui text-white/30 hover:text-red-500 transition-colors text-[10px] tracking-widest">
-                  {label}
-                </a>
-              ))}
-            </div>
-            <p className="font-geist text-white/20 text-xs text-center">
-              ГЭС 9/02 · Проспект Мусы Джалиля 51 · Этаж 4 · 420 кабинет · Набережные Челны
+          <div className="flex flex-col items-center md:items-end gap-3">
+            <p className="font-ui text-white font-bold text-sm tracking-widest">
+              18+ · ВХОД ТОЛЬКО ПО БИЛЕТАМ
             </p>
-            <p className="font-ui text-white/15 text-[10px] tracking-widest">
-              24–26 АПРЕЛЯ · 18+ · © ОКИНО 2025
+            <p className="font-geist text-white/50 text-sm text-center font-semibold">
+              ГЭС 9/02 · Проспект Мусы Джалиля 51 · Этаж 4 · Набережные Челны
+            </p>
+            <p className="font-ui text-white/30 text-[11px] tracking-widest">
+              24–26 АПРЕЛЯ · © ОКИНО 2026
             </p>
           </div>
         </div>

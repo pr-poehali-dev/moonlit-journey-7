@@ -131,7 +131,7 @@ export function FeaturesSection() {
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-8">
           <h2 className="font-heading text-4xl md:text-6xl text-white">Карта фильмов</h2>
-          <p className="font-geist text-white/40 text-sm mt-2 tracking-widest uppercase">
+          <p className="font-ui text-white text-sm mt-2 tracking-widest font-bold">
             Нажмите на метку, чтобы узнать о фильме
           </p>
           <p className="font-geist text-white/25 text-xs mt-1">
