@@ -329,10 +329,12 @@ export function ApplicationsTimeline() {
           <p className="font-geist text-white/25 text-xs mb-5">
             * Расписание может уточняться. Следите за обновлениями в соцсетях.
           </p>
-          <Button className="bg-red-600 hover:bg-red-700 text-white font-ui border-0 text-xs tracking-widest px-8">
-            <Icon name="Ticket" size={15} className="mr-2" />
-            Купить билеты
-          </Button>
+          <a href="https://okino-event.timepad.ru/event/3922667/" target="_blank" rel="noopener noreferrer">
+            <Button className="bg-red-600 hover:bg-red-700 text-white font-ui border-0 text-xs tracking-widest px-8">
+              <Icon name="Ticket" size={15} className="mr-2" />
+              Купить билет
+            </Button>
+          </a>
         </div>
       </div>
     </section>
