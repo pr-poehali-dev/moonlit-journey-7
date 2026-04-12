@@ -111,7 +111,7 @@
   /* Шрифт для кнопок и UI-элементов */
   .font-ui {
     font-family: "Montserrat", sans-serif;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
@@ -131,7 +131,7 @@
   /* Основной текстовый шрифт — мягкий, с засечками */
   .font-geist {
     font-family: "Cormorant Garamond", "Inter", system-ui, serif;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 0.01em;
   }
 

@@ -5,10 +5,10 @@ export function TestimonialsSection() {
         <div className="text-center mb-10">
           <p className="font-geist text-red-500 text-xs tracking-[0.4em] mb-3 uppercase font-light">Как добраться</p>
           <h2 className="font-bebas text-5xl md:text-6xl text-white tracking-wide">Место проведения</h2>
-          <p className="font-geist text-white/50 text-sm mt-3 font-light">
-            ГЭС 9/02 · Проспект Мусы Джалиля 51 · Этаж 4 · 420 кабинет
+          <p className="font-geist text-white font-semibold text-base md:text-lg mt-3">
+            ГЭС 9/02 · Проспект Мусы Джалиля 51
           </p>
-          <p className="font-geist text-white/30 text-xs mt-1 font-light">Набережные Челны</p>
+          <p className="font-geist text-white/60 text-sm mt-1">Этаж 4 · 420 кабинет · Набережные Челны</p>
         </div>
 
         <div className="rounded-lg overflow-hidden border border-white/10" style={{ height: "400px" }}>

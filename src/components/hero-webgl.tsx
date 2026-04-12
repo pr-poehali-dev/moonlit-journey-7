@@ -102,10 +102,10 @@ export function FlyerAnimation({ onDone }: { onDone: () => void }) {
             ? "flyerWave 4.5s ease-in-out infinite"
             : "none",
           transform: leaving
-            ? "translateY(-55vh) translateX(8vw) rotate(14deg) scale(0.75)"
+            ? "translateY(-55vh) translateX(4vw) rotate(8deg) scale(0.7)"
             : "none",
           transition: leaving
-            ? "transform 1.6s cubic-bezier(0.4,0,0.2,1), opacity 1.2s ease"
+            ? "transform 2.0s cubic-bezier(0.25,0,0.5,1), opacity 1.5s ease 0.3s"
             : "opacity 1.0s ease 0.2s",
           transformOrigin: "50% 6px",
           filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.8))",
@@ -173,8 +173,8 @@ export function Hero3DWebGL() {
         <div className="relative z-10 text-center px-4 flex flex-col items-center">
           <div className="mb-4 flex items-center gap-3">
             <span className="font-ui text-red-500 text-xs tracking-[0.3em]">18+</span>
-            <span className="w-px h-4 bg-white/20" />
-            <span className="font-ui text-white/30 text-xs tracking-widest">Любительское кино</span>
+            <span className="w-px h-4 bg-white/20 hidden sm:block" />
+            <span className="font-ui text-white/30 text-xs tracking-widest hidden sm:inline">Любительское кино</span>
           </div>
 
           <div className="relative mb-2">

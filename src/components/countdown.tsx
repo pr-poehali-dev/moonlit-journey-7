@@ -68,8 +68,12 @@ export function Countdown() {
           <Digit value={time.seconds} label="секунд" />
         </div>
 
-        <p className="font-geist text-white/25 text-sm mt-8 tracking-wider">
-          24–26 апреля · 14:00 и 18:00 · Набережные Челны
+        <p className="font-geist text-white/80 text-base md:text-lg mt-8 tracking-widest font-semibold">
+          <span className="text-red-400">24–26 апреля</span>
+          <span className="text-white/30 mx-2">·</span>
+          <span className="text-white/60">14:00 и 18:00</span>
+          <span className="text-white/30 mx-2">·</span>
+          <span className="text-red-400">Набережные Челны</span>
         </p>
 
         <div className="flex items-center gap-4 mt-8">
