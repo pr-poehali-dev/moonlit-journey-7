@@ -10,19 +10,14 @@ export function SafetySection() {
           <h2 className="font-bebas text-5xl md:text-6xl text-white tracking-wide">Трейлер фестиваля</h2>
         </div>
 
-        <div className="relative aspect-video rounded-lg overflow-hidden border border-white/10 bg-black flex items-center justify-center">
-          <div className="text-center">
-            <div className="w-20 h-20 rounded-full border-2 border-red-500/40 flex items-center justify-center mx-auto mb-4">
-              <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[22px] border-l-red-500 ml-1" />
-            </div>
-            <p className="font-bebas text-2xl text-white/30 tracking-wide">Трейлер скоро появится</p>
-
-          </div>
-          <div className="absolute inset-0 pointer-events-none"
-            style={{
-              background: "linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)",
-              backgroundSize: "40px 40px",
-            }} />
+        <div className="relative aspect-video rounded-lg overflow-hidden border border-white/10 bg-black">
+          <iframe
+            src="https://www.youtube.com/embed/KEpPcKBbeMs?rel=0&modestbranding=1"
+            title="Трейлер фестиваля"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="absolute inset-0 w-full h-full"
+          />
         </div>
 
 
