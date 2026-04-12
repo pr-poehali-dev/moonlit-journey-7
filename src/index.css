@@ -305,6 +305,20 @@
   Флаер летит на зрителя: маленький вдали → крупнее + покачивание на ветру.
   CSS-переменные --rot, --s0, --s1 задаются inline на элементе.
 */
+/* Частица рассыпается из центра и исчезает */
+@keyframes particleFly {
+  0% {
+    opacity: 0.85;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  70% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @keyframes flyerZoom {
   0% {
     opacity: 0;

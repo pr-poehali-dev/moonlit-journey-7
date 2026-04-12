@@ -32,6 +32,22 @@ const BG_FLYERS = [
   { id:11, x:50,  y:90,  rot: 40, s0:0.09, s1:0.23, dur:8.3, delay:0.9, op:0.46 },
 ]
 
+// Частицы для эффекта рассыпания — фиксированные смещения
+const PARTICLES = [
+  { dx: -38, dy: -52, r: -22, s: 0.22 },
+  { dx:  12, dy: -68, r:  15, s: 0.18 },
+  { dx:  55, dy: -40, r:  33, s: 0.25 },
+  { dx: -60, dy: -18, r: -40, s: 0.15 },
+  { dx:  68, dy:  10, r:  28, s: 0.20 },
+  { dx: -20, dy:  58, r: -18, s: 0.17 },
+  { dx:  40, dy:  62, r:  45, s: 0.12 },
+  { dx: -55, dy:  45, r: -35, s: 0.19 },
+  { dx:   8, dy:  80, r:  12, s: 0.14 },
+  { dx:  80, dy: -25, r: -50, s: 0.16 },
+  { dx: -80, dy: -38, r:  38, s: 0.13 },
+  { dx:  25, dy: -85, r: -28, s: 0.21 },
+]
+
 export function FlyerAnimation({ onDone }: { onDone: () => void }) {
   const [phase, setPhase] = useState<"fly" | "pinned" | "leave" | "done">("fly")
 
@@ -51,7 +67,7 @@ export function FlyerAnimation({ onDone }: { onDone: () => void }) {
   return (
     <div className="fixed inset-0 z-[10000] bg-black overflow-hidden">
 
-      {/* Фоновые флаеры: летят от маленьких к большим через CSS @keyframes */}
+      {/* Фоновые флаеры */}
       {BG_FLYERS.map(f => (
         <div
           key={f.id}
@@ -60,52 +76,59 @@ export function FlyerAnimation({ onDone }: { onDone: () => void }) {
             left: `${f.x}%`,
             top:  `${f.y}%`,
             width: "280px",
-            /* Каждый флаер: анимирован keyframes flyerZoom — от мелкого к крупному */
             animation: flying
               ? `flyerZoom ${f.dur}s cubic-bezier(0.2, 0.0, 0.4, 1.0) ${f.delay}s both`
               : "none",
-            /* После phase fly — плавно исчезают */
             opacity: flying ? undefined : 0,
             transform: flying
               ? undefined
               : `translate(-50%,-50%) rotate(${f.rot + 20}deg) scale(0.05)`,
-            transition: flying
-              ? "none"
-              : `opacity 1.5s ease, transform 1.8s ease`,
-            /* CSS переменные для keyframes */
-            "--rot":  `${f.rot}deg`,
-            "--s0":   `${f.s0}`,
-            "--s1":   `${f.s1}`,
+            transition: flying ? "none" : `opacity 1.5s ease, transform 1.8s ease`,
+            "--rot": `${f.rot}deg`,
+            "--s0":  `${f.s0}`,
+            "--s1":  `${f.s1}`,
           } as React.CSSProperties}
         >
-          <img
-            src={FLYER_URL}
-            alt=""
-            style={{ width: "100%", borderRadius: "3px", filter: "brightness(0.55)" }}
-            draggable={false}
-          />
+          <img src={FLYER_URL} alt="" style={{ width: "100%", borderRadius: "3px", filter: "brightness(0.55)" }} draggable={false} />
         </div>
       ))}
 
       {/* Приклеенный флаер по центру */}
-      <div
-        className="absolute inset-0 flex items-center justify-center"
-        style={{ pointerEvents: "none" }}
-      >
+      <div className="absolute inset-0 flex items-center justify-center" style={{ pointerEvents: "none" }}>
+
+        {/* Частицы рассыпания — появляются только в фазе leave */}
+        {leaving && PARTICLES.map((p, i) => (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              width: `${Math.round(60 + p.s * 180)}px`,
+              overflow: "hidden",
+              borderRadius: "3px",
+              opacity: 0,
+              transform: `translate(${p.dx * 3}vw, ${p.dy * 2}vh) rotate(${p.r * 2}deg) scale(0.05)`,
+              animation: `particleFly 1.2s cubic-bezier(0.2,0,0.8,1) ${i * 0.04}s forwards`,
+            }}
+          >
+            <img
+              src={FLYER_URL}
+              alt=""
+              style={{ width: `${Math.round(1 / p.s * 50)}px`, marginLeft: `${-Math.round((1 / p.s - 1) * 25)}px`, display: "block" }}
+              draggable={false}
+            />
+          </div>
+        ))}
+
+        {/* Основной флаер */}
         <div style={{
           width: "min(290px, 80vw)",
           position: "relative",
-          /* Появление */
-          opacity: pinned || leaving ? 1 : 0,
-          /* Качание на ветру + улёт */
-          animation: pinned
-            ? "flyerWave 4.5s ease-in-out infinite"
-            : "none",
-          transform: leaving
-            ? "translateY(-55vh) translateX(4vw) rotate(8deg) scale(0.7)"
-            : "none",
-          transition: leaving
-            ? "transform 2.0s cubic-bezier(0.25,0,0.5,1), opacity 1.5s ease 0.3s"
+          opacity: pinned ? 1 : leaving ? 0 : 0,
+          animation: pinned ? "flyerWave 4.5s ease-in-out infinite" : "none",
+          transition: pinned
+            ? "opacity 1.0s ease 0.2s"
+            : leaving
+            ? "opacity 0.25s ease"
             : "opacity 1.0s ease 0.2s",
           transformOrigin: "50% 6px",
           filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.8))",
