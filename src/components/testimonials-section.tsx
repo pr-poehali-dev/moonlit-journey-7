@@ -3,7 +3,7 @@ export function TestimonialsSection() {
     <section id="venue-map" className="py-20 px-4 bg-black">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10">
-          <p className="font-geist text-red-500 text-xs tracking-[0.4em] mb-3 uppercase font-bold">Как добраться?</p>
+          <p className="font-bebas text-red-500 text-sm tracking-[0.4em] mb-3">КАК ДОБРАТЬСЯ?</p>
           <h2 className="font-bebas text-5xl md:text-6xl text-white tracking-wide">Место проведения</h2>
           <p className="font-geist text-white font-semibold text-base md:text-lg mt-3">
             ГЭС 9/02 · Проспект Мусы Джалиля 51
