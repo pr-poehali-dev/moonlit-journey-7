@@ -18,21 +18,21 @@ interface Film {
 // Блок 1 — левая часть карты, Блок 2 — правая
 const films: Film[] = [
   // БЛОК 1
-  { id: 4,  title: "Три товарища",    author: "Ксения Ремарк",        synopsis: "Синопсис появится позже.",  duration: "12:26", location: "Библиотека",           block: 1, x: 22, y: 28 },
-  { id: 5,  title: "Мост",            author: "Артур Садриев",         synopsis: "Синопсис появится позже.",  duration: "2:52",  location: "Мост",                 block: 1, x: 30, y: 44 },
-  { id: 9,  title: "С любовью, Борис",author: "Виталий Красильников",  synopsis: "Синопсис появится позже.",  duration: "15:07", location: "Деревенский домик",    block: 1, x: 18, y: 58 },
-  { id: 15, title: "ПВЗ",             author: "Артур Камалов",         synopsis: "Синопсис появится позже.",  duration: "9:45",  location: "ПВЗ",                  block: 1, x: 38, y: 22 },
-  { id: 20, title: "Остановка",       author: "Андрей Петров",         synopsis: "Синопсис появится позже.",  duration: "11:54", location: "Остановка",            block: 1, x: 26, y: 68 },
-  { id: 21, title: "Plato",           author: "Темур Сангинов",        synopsis: "Синопсис появится позже.",  duration: "6:13",  location: "Роллердром/скейтпарк", block: 1, x: 42, y: 52 },
-  { id: 23, title: "МУЖЕСТВО",        author: "Денис Файзуллин",       synopsis: "Синопсис появится позже.",  duration: "3:38",  location: "Подземный переход",    block: 1, x: 34, y: 76 },
+  { id: 4,  title: "Три товарища",    author: "Ксения Ремарк",        synopsis: "Синопсис появится позже.",  duration: "12:26", location: "Библиотека",           block: 1, x: 8,  y: 31 },
+  { id: 5,  title: "Мост",            author: "Артур Садриев",         synopsis: "Синопсис появится позже.",  duration: "2:52",  location: "Мост",                 block: 1, x: 29, y: 17 },
+  { id: 9,  title: "С любовью, Борис",author: "Виталий Красильников",  synopsis: "Синопсис появится позже.",  duration: "15:07", location: "Деревенский домик",    block: 1, x: 14, y: 72 },
+  { id: 15, title: "ПВЗ",             author: "Артур Камалов",         synopsis: "Синопсис появится позже.",  duration: "9:45",  location: "ПВЗ",                  block: 1, x: 41, y: 55 },
+  { id: 20, title: "Остановка",       author: "Андрей Петров",         synopsis: "Синопсис появится позже.",  duration: "11:54", location: "Остановка",            block: 1, x: 22, y: 47 },
+  { id: 21, title: "Plato",           author: "Темур Сангинов",        synopsis: "Синопсис появится позже.",  duration: "6:13",  location: "Роллердром/скейтпарк", block: 1, x: 36, y: 83 },
+  { id: 23, title: "МУЖЕСТВО",        author: "Денис Файзуллин",       synopsis: "Синопсис появится позже.",  duration: "3:38",  location: "Подземный переход",    block: 1, x: 44, y: 28 },
   // БЛОК 2
-  { id: 2,  title: "Кисть",          author: "Катерина Кузнецова",    synopsis: "Синопсис появится позже.",  duration: "—",     location: "Автовокзал",           block: 2, x: 58, y: 26 },
-  { id: 3,  title: "—",              author: "Айрат Башаров",         synopsis: "Синопсис появится позже.",  duration: "—",     location: "Банк / банкомат",      block: 2, x: 68, y: 38 },
-  { id: 10, title: "—",              author: "Алексей Мурыгин",       synopsis: "Синопсис появится позже.",  duration: "—",     location: "Туалет",               block: 2, x: 74, y: 54 },
-  { id: 13, title: "Побочный эффект",author: "Алиса Чинская",         synopsis: "Синопсис появится позже.",  duration: "—",     location: "СТО / Автомойка / АЗС",block: 2, x: 62, y: 62 },
-  { id: 14, title: "КОШМАР",         author: "Михаил Чепкасов",       synopsis: "Синопсис появится позже.",  duration: "—",     location: "Парковка",             block: 2, x: 80, y: 44 },
-  { id: 19, title: "—",              author: "Артур Мифтахов",        synopsis: "Синопсис появится позже.",  duration: "—",     location: "Офис",                 block: 2, x: 70, y: 68 },
-  { id: 27, title: "—",              author: "Дима Сарычев",          synopsis: "Синопсис появится позже.",  duration: "—",     location: "Кухня",                block: 2, x: 84, y: 72 },
+  { id: 2,  title: "Кисть",          author: "Катерина Кузнецова",    synopsis: "Синопсис появится позже.",  duration: "—",     location: "Автовокзал",           block: 2, x: 55, y: 19 },
+  { id: 3,  title: "—",              author: "Айрат Башаров",         synopsis: "Синопсис появится позже.",  duration: "—",     location: "Банк / банкомат",      block: 2, x: 77, y: 36 },
+  { id: 10, title: "—",              author: "Алексей Мурыгин",       synopsis: "Синопсис появится позже.",  duration: "—",     location: "Туалет",               block: 2, x: 63, y: 74 },
+  { id: 13, title: "Побочный эффект",author: "Алиса Чинская",         synopsis: "Синопсис появится позже.",  duration: "—",     location: "СТО / Автомойка / АЗС",block: 2, x: 88, y: 61 },
+  { id: 14, title: "КОШМАР",         author: "Михаил Чепкасов",       synopsis: "Синопсис появится позже.",  duration: "—",     location: "Парковка",             block: 2, x: 71, y: 50 },
+  { id: 19, title: "—",              author: "Артур Мифтахов",        synopsis: "Синопсис появится позже.",  duration: "—",     location: "Офис",                 block: 2, x: 59, y: 43 },
+  { id: 27, title: "—",              author: "Дима Сарычев",          synopsis: "Синопсис появится позже.",  duration: "—",     location: "Кухня",                block: 2, x: 82, y: 82 },
 ]
 
 function MapPin({ film, isActive, onClick }: { film: Film; isActive: boolean; onClick: () => void }) {
