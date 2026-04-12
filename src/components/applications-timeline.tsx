@@ -208,7 +208,15 @@ const typeColors: Record<string, string> = {
   special: "border-white/8 bg-white/2",
 }
 
-const typeTextColors: Record<string, string> = {
+const typeTimeColors: Record<string, string> = {
+  opening: "text-red-400",
+  screening: "text-red-400",
+  talk: "text-red-300",
+  closing: "text-red-400",
+  special: "text-white/40",
+}
+
+const typeTitleColors: Record<string, string> = {
   opening: "text-red-400",
   screening: "text-white",
   talk: "text-red-300",
@@ -253,13 +261,13 @@ function ShowAccordion({ show }: { show: ShowBlock }) {
               className={`flex gap-3 p-3 rounded-lg border ${typeColors[session.type]}`}
             >
               <div className="flex-shrink-0 w-20 text-center">
-                <span className={`font-space-mono text-xs font-bold leading-tight ${typeTextColors[session.type]}`}>
+                <span className={`font-space-mono text-xs font-bold leading-tight ${typeTimeColors[session.type]}`}>
                   {session.time}
                 </span>
               </div>
               <div className="w-px bg-red-500/15 flex-shrink-0" />
               <div>
-                <h4 className={`font-heading text-sm ${typeTextColors[session.type]}`}>
+                <h4 className={`font-heading text-sm ${typeTitleColors[session.type]}`}>
                   {session.title}
                 </h4>
                 <p className="font-geist text-white/40 text-xs mt-0.5 leading-relaxed">

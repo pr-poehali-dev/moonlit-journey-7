@@ -15,14 +15,13 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center md:items-end gap-3">
-            <p className="font-ui text-white font-bold text-sm tracking-widest">
-              18+ · ВХОД ТОЛЬКО ПО БИЛЕТАМ
-            </p>
-            <p className="font-geist text-white/50 text-sm text-center font-semibold">
+          <div className="flex flex-col items-center md:items-end gap-2">
+            <p className="font-ui text-white font-bold text-sm tracking-widest">18+</p>
+            <p className="font-ui text-white font-bold text-sm tracking-widest">ВХОД ТОЛЬКО ПО БИЛЕТАМ</p>
+            <p className="font-geist text-white font-bold text-sm text-center mt-1">
               ГЭС 9/02 · Проспект Мусы Джалиля 51 · Этаж 4 · Набережные Челны
             </p>
-            <p className="font-ui text-white/30 text-[11px] tracking-widest">
+            <p className="font-ui text-white font-bold text-[11px] tracking-widest">
               24–26 АПРЕЛЯ · © ОКИНО 2026
             </p>
           </div>
