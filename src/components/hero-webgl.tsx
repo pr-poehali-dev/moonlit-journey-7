@@ -32,21 +32,53 @@ const BG_FLYERS = [
   { id:11, x:50,  y:90,  rot: 40, s0:0.09, s1:0.23, dur:8.3, delay:0.9, op:0.46 },
 ]
 
-// Частицы для эффекта рассыпания — фиксированные смещения
+// Частицы для эффекта рассыпания — конечные позиции разлёта
 const PARTICLES = [
-  { dx: -38, dy: -52, r: -22, s: 0.22 },
-  { dx:  12, dy: -68, r:  15, s: 0.18 },
-  { dx:  55, dy: -40, r:  33, s: 0.25 },
-  { dx: -60, dy: -18, r: -40, s: 0.15 },
-  { dx:  68, dy:  10, r:  28, s: 0.20 },
-  { dx: -20, dy:  58, r: -18, s: 0.17 },
-  { dx:  40, dy:  62, r:  45, s: 0.12 },
-  { dx: -55, dy:  45, r: -35, s: 0.19 },
-  { dx:   8, dy:  80, r:  12, s: 0.14 },
-  { dx:  80, dy: -25, r: -50, s: 0.16 },
-  { dx: -80, dy: -38, r:  38, s: 0.13 },
-  { dx:  25, dy: -85, r: -28, s: 0.21 },
+  { tx: -28, ty: -42, r: -120, sc: 0.05 },
+  { tx:  10, ty: -58, r:  95,  sc: 0.04 },
+  { tx:  42, ty: -30, r:  200, sc: 0.06 },
+  { tx: -48, ty: -12, r: -180, sc: 0.04 },
+  { tx:  55, ty:   8, r:  150, sc: 0.05 },
+  { tx: -15, ty:  48, r: -90,  sc: 0.04 },
+  { tx:  32, ty:  52, r:  220, sc: 0.03 },
+  { tx: -42, ty:  38, r: -160, sc: 0.05 },
+  { tx:   5, ty:  65, r:  80,  sc: 0.04 },
+  { tx:  62, ty: -18, r: -200, sc: 0.04 },
+  { tx: -62, ty: -28, r:  170, sc: 0.03 },
+  { tx:  18, ty: -72, r: -130, sc: 0.05 },
 ]
+
+function Particles() {
+  const [exploded, setExploded] = useState(false)
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setExploded(true))
+    return () => cancelAnimationFrame(id)
+  }, [])
+
+  return (
+    <>
+      {PARTICLES.map((p, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            width: "min(120px, 30vw)",
+            overflow: "hidden",
+            borderRadius: "3px",
+            opacity: exploded ? 0 : 0.9,
+            transform: exploded
+              ? `translate(${p.tx}vw, ${p.ty}vh) rotate(${p.r}deg) scale(${p.sc})`
+              : "translate(0,0) rotate(0deg) scale(1)",
+            transition: `transform ${0.8 + i * 0.03}s cubic-bezier(0.2,0,0.6,1) ${i * 0.02}s, opacity ${0.6}s ease ${0.15 + i * 0.02}s`,
+          }}
+        >
+          <img src={FLYER_URL} alt="" style={{ width: "100%", display: "block" }} draggable={false} />
+        </div>
+      ))}
+    </>
+  )
+}
 
 export function FlyerAnimation({ onDone }: { onDone: () => void }) {
   const [phase, setPhase] = useState<"fly" | "pinned" | "leave" | "done">("fly")
@@ -96,40 +128,16 @@ export function FlyerAnimation({ onDone }: { onDone: () => void }) {
       {/* Приклеенный флаер по центру */}
       <div className="absolute inset-0 flex items-center justify-center" style={{ pointerEvents: "none" }}>
 
-        {/* Частицы рассыпания — появляются только в фазе leave */}
-        {leaving && PARTICLES.map((p, i) => (
-          <div
-            key={i}
-            style={{
-              position: "absolute",
-              width: `${Math.round(60 + p.s * 180)}px`,
-              overflow: "hidden",
-              borderRadius: "3px",
-              opacity: 0,
-              transform: `translate(${p.dx * 3}vw, ${p.dy * 2}vh) rotate(${p.r * 2}deg) scale(0.05)`,
-              animation: `particleFly 1.2s cubic-bezier(0.2,0,0.8,1) ${i * 0.04}s forwards`,
-            }}
-          >
-            <img
-              src={FLYER_URL}
-              alt=""
-              style={{ width: `${Math.round(1 / p.s * 50)}px`, marginLeft: `${-Math.round((1 / p.s - 1) * 25)}px`, display: "block" }}
-              draggable={false}
-            />
-          </div>
-        ))}
+        {/* Частицы рассыпания — монтируются в момент leave, сразу разлетаются */}
+        {leaving && <Particles />}
 
-        {/* Основной флаер */}
+        {/* Основной флаер — скрывается мгновенно при leave */}
         <div style={{
           width: "min(290px, 80vw)",
           position: "relative",
-          opacity: pinned ? 1 : leaving ? 0 : 0,
+          opacity: pinned ? 1 : 0,
           animation: pinned ? "flyerWave 4.5s ease-in-out infinite" : "none",
-          transition: pinned
-            ? "opacity 1.0s ease 0.2s"
-            : leaving
-            ? "opacity 0.25s ease"
-            : "opacity 1.0s ease 0.2s",
+          transition: "opacity 1.0s ease 0.2s",
           transformOrigin: "50% 6px",
           filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.8))",
         }}>
