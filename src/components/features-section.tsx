@@ -155,18 +155,28 @@ export function FeaturesSection() {
             backgroundSize: "auto, 60px 60px, 60px 60px, 15px 15px, 15px 15px",
           }}
         >
-          {/* Декоративный SVG — круги и маршруты */}
-          <svg className="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
-            <circle cx="200" cy="200" r="160" stroke="white" strokeWidth="0.5" fill="none" />
-            <circle cx="200" cy="200" r="110" stroke="white" strokeWidth="0.5" fill="none" />
-            <circle cx="200" cy="200" r="60"  stroke="white" strokeWidth="0.5" fill="none" />
-            <line x1="40"  y1="200" x2="360" y2="200" stroke="white" strokeWidth="0.5" />
-            <line x1="200" y1="40"  x2="200" y2="360" stroke="white" strokeWidth="0.5" />
-            <path d="M200 40 Q240 100 270 140 Q310 180 360 200 Q310 220 270 260 Q240 300 200 360 Q160 300 130 260 Q90 220 40 200 Q90 180 130 140 Q160 100 200 40Z" stroke="white" strokeWidth="0.3" fill="none" opacity="0.5" />
-            <path d="M100 80  Q140 120 170 160 Q185 180 190 200" stroke="white" strokeWidth="0.4" fill="none" opacity="0.6" />
-            <path d="M300 80  Q260 120 230 160 Q215 180 210 200" stroke="white" strokeWidth="0.4" fill="none" opacity="0.6" />
-            <path d="M80  300 Q130 280 170 250 Q185 225 200 215" stroke="white" strokeWidth="0.4" fill="none" opacity="0.6" />
-            <path d="M320 300 Q270 280 230 250 Q215 225 200 215" stroke="white" strokeWidth="0.4" fill="none" opacity="0.6" />
+          {/* Декоративный SVG — карта города */}
+          <svg className="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice">
+            {/* Концентрические круги */}
+            <circle cx="200" cy="260" r="180" stroke="white" strokeWidth="0.5" fill="none" />
+            <circle cx="200" cy="260" r="125" stroke="white" strokeWidth="0.5" fill="none" />
+            <circle cx="200" cy="260" r="70"  stroke="white" strokeWidth="0.5" fill="none" />
+            {/* Река — плавная кривая через весь экран */}
+            <path d="M0 170 Q60 155 110 175 Q170 200 210 190 Q260 178 310 195 Q355 210 400 200" stroke="white" strokeWidth="2.5" fill="none" opacity="0.5" />
+            <path d="M0 178 Q60 163 110 183 Q170 208 210 198 Q260 186 310 203 Q355 218 400 208" stroke="white" strokeWidth="1" fill="none" opacity="0.25" />
+            {/* Главная дорога горизонталь */}
+            <line x1="0" y1="310" x2="400" y2="295" stroke="white" strokeWidth="1.2" opacity="0.4" />
+            {/* Главная дорога диагональ */}
+            <line x1="0" y1="80" x2="400" y2="440" stroke="white" strokeWidth="1" opacity="0.3" />
+            {/* Второстепенные дороги */}
+            <path d="M80 0 Q90 80 100 150 Q112 230 95 310 Q80 390 85 520" stroke="white" strokeWidth="0.7" fill="none" opacity="0.3" />
+            <path d="M310 0 Q300 90 285 160 Q270 240 280 320 Q290 400 300 520" stroke="white" strokeWidth="0.7" fill="none" opacity="0.3" />
+            <path d="M0 400 Q80 390 150 370 Q220 350 290 360 Q340 368 400 355" stroke="white" strokeWidth="0.7" fill="none" opacity="0.3" />
+            {/* Переулки короткие */}
+            <line x1="150" y1="220" x2="180" y2="310" stroke="white" strokeWidth="0.4" opacity="0.25" />
+            <line x1="245" y1="215" x2="260" y2="300" stroke="white" strokeWidth="0.4" opacity="0.25" />
+            <line x1="110" y1="350" x2="200" y2="340" stroke="white" strokeWidth="0.4" opacity="0.2" />
+            <line x1="220" y1="345" x2="310" y2="330" stroke="white" strokeWidth="0.4" opacity="0.2" />
           </svg>
 
           {/* Пины */}
