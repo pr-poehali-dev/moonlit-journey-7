@@ -161,9 +161,6 @@ export function FeaturesSection() {
             <circle cx="200" cy="260" r="180" stroke="white" strokeWidth="0.5" fill="none" />
             <circle cx="200" cy="260" r="125" stroke="white" strokeWidth="0.5" fill="none" />
             <circle cx="200" cy="260" r="70"  stroke="white" strokeWidth="0.5" fill="none" />
-            {/* Река — плавная кривая через весь экран */}
-            <path d="M0 170 Q60 155 110 175 Q170 200 210 190 Q260 178 310 195 Q355 210 400 200" stroke="white" strokeWidth="2.5" fill="none" opacity="0.5" />
-            <path d="M0 178 Q60 163 110 183 Q170 208 210 198 Q260 186 310 203 Q355 218 400 208" stroke="white" strokeWidth="1" fill="none" opacity="0.25" />
             {/* Главная дорога горизонталь */}
             <line x1="0" y1="310" x2="400" y2="295" stroke="white" strokeWidth="1.2" opacity="0.4" />
             {/* Главная дорога диагональ */}
