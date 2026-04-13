@@ -32,7 +32,7 @@ export function SafetySection() {
           </a>
         </div>
         <p className="font-geist text-white/20 text-xs text-center mt-3">
-          Если видео не загружается — откройте трейлер на{" "}
+          * Если видео не загружается — откройте трейлер на{" "}
           <a href="https://www.youtube.com/watch?v=KEpPcKBbeMs" target="_blank" rel="noopener noreferrer" className="text-red-500/60 hover:text-red-400 transition-colors underline underline-offset-2">
             YouTube
           </a>
