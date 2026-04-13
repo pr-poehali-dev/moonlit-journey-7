@@ -154,7 +154,7 @@ export function Navbar() {
           </div>
 
           {/* Mobile right */}
-          <div className="md:hidden flex items-center gap-3">
+          <div className="md:hidden flex items-center gap-3 ml-auto">
             {/* Корзина мобайл */}
             <button
               onClick={() => setCartOpen(o => !o)}

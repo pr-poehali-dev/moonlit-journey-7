@@ -18,7 +18,25 @@ export function SafetySection() {
             allowFullScreen
             className="absolute inset-0 w-full h-full"
           />
+          {/* Фолбэк для случаев, когда YouTube недоступен */}
+          <a
+            href="https://www.youtube.com/watch?v=KEpPcKBbeMs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute inset-0 flex flex-col items-center justify-center bg-black/0 hover:bg-black/60 transition-colors group opacity-0 hover:opacity-100"
+          >
+            <div className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center mb-3">
+              <div className="w-0 h-0 border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent border-l-[20px] border-l-white ml-1" />
+            </div>
+            <span className="font-bebas text-white text-lg tracking-wide">Смотреть на YouTube</span>
+          </a>
         </div>
+        <p className="font-geist text-white/20 text-xs text-center mt-3">
+          Если видео не загружается — откройте трейлер на{" "}
+          <a href="https://www.youtube.com/watch?v=KEpPcKBbeMs" target="_blank" rel="noopener noreferrer" className="text-red-500/60 hover:text-red-400 transition-colors underline underline-offset-2">
+            YouTube
+          </a>
+        </p>
 
 
       </div>

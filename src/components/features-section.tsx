@@ -128,7 +128,7 @@ export function FeaturesSection() {
             Нажмите на метку, чтобы узнать о фильме
           </p>
           <p className="font-geist text-white/25 text-xs mt-1">
-            * Последовательность фильмов не утверждена
+            Последовательность фильмов на фестивале не утверждена
           </p>
         </div>
 
