@@ -143,7 +143,7 @@ export function FeaturesSection() {
         <div
           className="relative rounded-lg overflow-hidden border border-white/10"
           style={{
-            height: "520px",
+            height: "clamp(340px, 55vw, 520px)",
             background: "#090909",
             backgroundImage: `
               radial-gradient(ellipse 90% 80% at 50% 45%, rgba(60,60,60,0.15) 0%, transparent 70%),
