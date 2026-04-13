@@ -327,7 +327,7 @@ export function ApplicationsTimeline() {
 
         <div className="mt-10 text-center">
           <p className="font-geist text-white/25 text-xs mb-5">
-            * Расписание может уточняться. Следите за обновлениями в соцсетях.
+            * Расписание может измениться. Следите за обновлениями в соцсетях ОКИНО и на сайте.
           </p>
           <a href="https://okino-event.timepad.ru/event/3922667/" target="_blank" rel="noopener noreferrer">
             <Button className="bg-red-600 hover:bg-red-700 text-white font-ui border-0 text-xs tracking-widest px-8">
