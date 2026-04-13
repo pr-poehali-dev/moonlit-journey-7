@@ -202,7 +202,7 @@ export function Hero3DWebGL() {
         </div>
 
         <div className="relative z-10 text-center px-4 flex flex-col items-center">
-          <div className="mb-4 hidden sm:flex items-center gap-3">
+          <div className="mb-4 hidden md:flex items-center gap-3">
             <span className="font-ui text-red-500 text-xs tracking-[0.3em]">18+</span>
             <span className="w-px h-4 bg-white/20" />
             <span className="font-ui text-white/30 text-xs tracking-widest">Любительское кино</span>
