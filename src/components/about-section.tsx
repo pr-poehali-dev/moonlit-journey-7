@@ -48,7 +48,7 @@ export function AboutSection() {
           <div className="flex flex-col gap-4">
             {[
               { label: "Авторов", value: "14", sub: "участников фестиваля" },
-              { label: "дня показов", value: "3", sub: "24, 25, 26 апреля" },
+              { label: "Дня показов", value: "3", sub: "24, 25, 26 апреля" },
               { label: "Фильмов", value: "14", sub: "по одной картине от каждого автора" },
             ].map((stat, i) => (
               <div key={i} className="border border-white/8 rounded-lg p-5 flex items-center gap-5 bg-zinc-950/60">
