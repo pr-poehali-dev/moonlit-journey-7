@@ -96,7 +96,7 @@ function FilmCard({ film, onClose }: { film: Film; onClose: () => void }) {
 
         {film.image && (
           <div className="mb-3 rounded overflow-hidden">
-            <img src={film.image} alt={film.title} className="w-full h-32 object-cover" style={film.id === 3 ? { objectPosition: "center 20%" } : undefined} />
+            <img src={film.image} alt={film.title} className="w-full h-32 object-cover" style={film.id === 3 ? { objectPosition: "center 0%" } : undefined} />
           </div>
         )}
 
