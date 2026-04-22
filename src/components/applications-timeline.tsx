@@ -26,7 +26,7 @@ interface Day {
 const days: Day[] = [
   {
     date: "24 апреля",
-    weekday: "Четверг",
+    weekday: "Пятница",
     shows: [
       {
         label: "Дневной показ",
@@ -82,7 +82,7 @@ const days: Day[] = [
   },
   {
     date: "25 апреля",
-    weekday: "Пятница",
+    weekday: "Суббота",
     shows: [
       {
         label: "Дневной показ",
@@ -138,7 +138,7 @@ const days: Day[] = [
   },
   {
     date: "26 апреля",
-    weekday: "Суббота",
+    weekday: "Воскресенье",
     shows: [
       {
         label: "Дневной показ",
